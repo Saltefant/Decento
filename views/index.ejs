@@ -9,6 +9,24 @@
         body        { padding-top:80px; }
     </style>
 </head>
+
+<header>
+    <a href="#!"><div class="banner"><h1>Some sort of portfolio</h1></div></a>
+    <!--Navigation bar-->
+    <div class="tab">
+        <div id="nav-placeholder">
+                <%- include navigation.ejs %>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js">
+            $(function(){
+                $("#nav-placeholder").load("views/navigation.ejs");
+                });
+        </script>
+    </div>
+    <!--end of Navigation bar-->
+</header>
+
 <body>
 <div class="container">
 
@@ -19,6 +37,10 @@
 
         <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
         <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+    </div>
+
+    <div>
+        <p>Helhlehlhle</p>
     </div>
 
 </div>
