@@ -1,10 +1,54 @@
+<link href="/css/styling.css" rel="stylesheet" type="text/css">
+
+<div class="menu-wrapper"> <!-- removes jumping !-->
 <ul id="menu">
-    <li><a href="#!Home" tabindex="0">Home</a></li>
-    <li><a href="/test" tabindex="0">Projects</a></li>
-    <li><a href="#!About" tabindex="0">About</a></li>
+    <li class="left"><a href="#!Home" tabindex="0">Home</a></li>
+    <li class="left"><a href="/test" tabindex="0">Projects</a></li>
+    <li class="left"><a href="/profile" tabindex="0">Profile</a></li>
+    <li class="left leftend"><a href="#!About" tabindex="0">About</a></li>
+    <li class="right rightend"><a onclick="document.getElementById('id01').style.display='block'" cursor="pointer">Login</a></li>
 </ul>
-<ul id="login-style">
-    <li><input id="login-input" type="text" placeholder="Username/Email"></input></li>
-    <li><input id="login-input" type="text" placeholder="Password"></input></li>
-    <li><button id="login-submit" type="submit">Login</button></li>
-</ul>
+</div>
+
+<div id="id01" class="modal">
+    
+    <form class="modal-content animate" action="/login" method="post">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <img src="/images/logo.jpg" alt="Decento" class="avatar">
+      </div>
+  
+      <div class="container">
+        <label><b>Email</b></label>
+        <input type="text" placeholder="Enter email" name="email" required>
+  
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+          
+        <button type="submit">Login</button>
+        <input type="checkbox" checked="checked"> Remember me
+      </div>
+  
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+    </form>
+  </div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display='none';
+        }
+    }
+</script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/scripts/navposition.js"></script>

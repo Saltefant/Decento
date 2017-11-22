@@ -1,0 +1,65 @@
+ul {
+    position: fixed;
+    top: 40;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(190, 0, 0);
+    border-top: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px 100px 5px 100px;
+    text-decoration: none;
+    transition: 0.3s;
+    border: 0px solid rgb(0,0,0);
+}
+
+li a:focus {
+    color: rgb(255,255,255);
+    outline: none;
+    text-decoration: none;
+    background-color: rgb(90, 0, 0)
+}
+/*/////////////////////////////////////////////////////
+//
+//    NAVIGATION
+//
+/////////////////////////////////////////////////////*/
+
+li.left{
+    float: left;
+    border-left: 1px solid rgb(0, 0, 0);
+}
+
+li.right{
+    float: right;
+    border-right: 1px solid rgb(0, 0, 0);
+}
+
+li.leftend a {
+    border-right: 1px solid rgb(0, 0, 0);
+}
+
+li.rightend a {
+    border-left: 1px solid rgb(0, 0, 0);
+}
+
+li.left a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: rgb(140, 0, 0);
+    border-left: 3px solid rgb(0, 0, 0)
+}
+li.right a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: rgb(140, 0, 0);
+    border-right: 3px solid rgb(0, 0, 0)
+}
