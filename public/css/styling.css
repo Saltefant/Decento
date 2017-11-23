@@ -36,12 +36,18 @@ footer p {
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-.logo {
+.logo-area {
     z-index: -1;
     position: fixed;
     top: 22px;
-    left: 22px;
-    width: 350px;
+    left: 30px;
+    width: 335px;
+    height: 60px;
+
+    /*UNCOMMENT TO SEE AREA
+    background-color: rgb(140, 0, 0);
+    opacity: 0.5;
+    */
 }
 
 .mini-banner {
