@@ -38,8 +38,20 @@ module.exports = function(app, passport) {
         app.get('/test', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('test.ejs', { message: req.flash('signupMessage') });
-                });
+                    res.render('test.ejs');
+        });
+
+        app.get('/about', function(req, res) {
+            
+                    // render the page and pass in any flash data if it exists
+                    res.render('about.ejs');
+        });
+
+        app.get('/projects', function(req, res) {
+            
+                    // render the page and pass in any flash data if it exists
+                    res.render('projects.ejs');
+        });
     
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
