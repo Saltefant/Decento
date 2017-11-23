@@ -10,6 +10,7 @@ footer {
     height: 35px;
     bottom: 0px;
     background-color: rgb(190, 0, 0);
+    -webkit-box-shadow: 0px -4px 4px rgba(0, 0, 0, .5);   /* for Chrome (X-pos, Y-pos, blur)*/
     box-shadow: 0px -4px 4px rgb(0, 0, 0, .5);
 }
 
@@ -20,6 +21,7 @@ footer p {
 }
 
 .whiteout {
+    margin-top: -1px; /* removes small glitch in chrome */
     width:100%;
     background-color: rgb(255, 255, 255);
 }
@@ -84,26 +86,34 @@ nav {
     position: relative;
     overflow: hidden;
     width: 100%;
-    box-shadow: 0px 4px 4px rgb(0, 0, 0, .5);
+    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);   /* for Chrome (X-pos, Y-pos, blur)*/ 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);
 }
 
 .nav-scrolled {
     position: fixed;
+    overflow: hidden;
     top: 0px;
-    box-shadow: 0px 4px 4px rgb(0, 0, 0, .5);
+    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);   /* for Chrome (X-pos, Y-pos, blur)*/ 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);
 }
 
 .menu-wrapper {
-    height: 29px;
+    height: 32px;
+}
+
+.nav, .nav-scrolled, ul, li a, footer {
+    height: 30px;
 }
 
 ul {
+    height: 50 px;
     width: 100%;
     list-style-type: none;
+    background-color: rgb(126, 126, 126);
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(126, 126, 126);
     border-top: 1px solid rgb(0, 0, 0);
     border-bottom: 1px solid rgb(0, 0, 0);
 }
@@ -118,7 +128,7 @@ li a {
     text-align: center;
     padding: 5px 100px 5px 100px;
     text-decoration: none;
-    transition: 0.2s;
+    transition: 0.3s;
     border: 0px solid rgb(0,0,0);
 }
 
