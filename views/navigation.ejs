@@ -1,12 +1,15 @@
-<div class="menu-wrapper"> <!-- removes scroll jumping !-->
-  <ul id="menu">
-      <li class="left"><a href="/" tabindex="0">Home</a></li>
-      <li class="left"><a href="/projects" tabindex="0">Projects</a></li>
-      <li class="left"><a href="/profile" tabindex="0">Profile</a></li>
-      <li class="left leftend"><a href="/about" tabindex="0">About</a></li>
-      <li class="right rightend"><a onclick="document.getElementById('id01').style.display='block'" cursor="pointer">Login</a></li>
-  </ul>
-</div>
+<nav>
+  <div class="removeJump">
+    <div class="navigation" id="navigation">
+      <a href="javascript:void(0);" style="font-size:15px;" class="collapsed-navigation-icon left" onclick="ResponsiveFunction()">&#9776;</a></li>
+      <a class="left" href="/" tabindex="0">Home</a></li>
+      <a class="left" href="/projects" tabindex="0">Projects</a></li>
+      <a class="left" href="/profile" tabindex="0">Profile</a></li>
+      <a class="left leftend" href="/about" tabindex="0">About</a></li>
+      <a class="right rightend" onclick="document.getElementById('id01').style.display='block'" cursor="pointer">Login</a></li>
+    </div>
+  </div>
+</nav>
 
 <div id="id01" class="modal">
     
@@ -33,18 +36,6 @@
       </div>
     </form>
   </div>
-
-<script>
-    // Get the modal
-    var modal = document.getElementById('id01');
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display='none';
-        }
-    }
-</script>
 
 
 

@@ -1,5 +1,5 @@
 body {
-    margin:100px 0px 0px 0px;
+    margin:150px 0px 0px 0px;
 }
 
 footer {
@@ -54,7 +54,7 @@ footer p {
 
 .mini-banner {
     float: left;
-    height: 100px;
+    height: 150px;
     width: auto;
     z-index: -2;
     top: 0px;
@@ -66,7 +66,7 @@ footer p {
     top: 0px;
     position: fixed;
     width: 100%;
-    height: 100px;
+    height: 150px;
     margin: auto;
     overflow: hidden;
     /*background: url("/images/logo.jpg"); */
@@ -84,10 +84,6 @@ footer p {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 nav {
     position: relative;
-    overflow: hidden;
-    width: 100%;
-    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);   /* for Chrome (X-pos, Y-pos, blur)*/ 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);
 }
 
 .nav-scrolled {
@@ -98,16 +94,12 @@ nav {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);
 }
 
-.menu-wrapper {
-    height: 32px;
-}
-
-.nav, .nav-scrolled, ul, li a, footer {
+.removeJump {
     height: 30px;
 }
 
-ul {
-    height: 50 px;
+.navigation {
+    overflow: hidden;
     width: 100%;
     list-style-type: none;
     background-color: rgb(126, 126, 126);
@@ -116,30 +108,42 @@ ul {
     overflow: hidden;
     border-top: 1px solid rgb(0, 0, 0);
     border-bottom: 1px solid rgb(0, 0, 0);
+    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);   /* for Chrome (X-pos, Y-pos, blur)*/ 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);
 }
 
-li a {
+
+.navigation, .nav-scrolled, a, footer {
+    height: 30px;
+}
+
+.navigation .collapsed-navigation-icon {
+    display: none;
+}
+
+.navigation a {
     background-color: rgb(190, 0, 0);
     cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
     font-size: 14px;
     display: block;
+    height: 100%;
     color: rgb(255, 255, 255);
-    text-align: center;
-    padding: 5px 100px 5px 100px;
+    padding: 6px 80px 0px 80px;
     text-decoration: none;
     transition: 0.3s;
     border: 0px solid rgb(0,0,0);
 }
 
-li.left a:focus {
+a.left:focus {
     color: rgb(255,255,255);
     outline: none;
     text-decoration: none;
     background-color: rgb(140, 0, 0);
     border-left: 3px solid rgb(0, 0, 0)
 }
-li.right a:focus {
+a.right:focus {
     color: rgb(255,255,255);
     outline: none;
     text-decoration: none;
@@ -147,35 +151,61 @@ li.right a:focus {
     border-left: 3px solid rgb(0, 0, 0)
 }
 
-li.left{
+a.left{
     float: left;
     border-left: 1px solid rgb(0, 0, 0);
 }
 
-li.right{
+a.right{
     float: right;
     border-right: 1px solid rgb(0, 0, 0);
 }
 
-li.leftend a {
+a.leftend {
     border-right: 1px solid rgb(0, 0, 0);
 }
 
-li.rightend a {
+a.rightend {
     border-left: 1px solid rgb(0, 0, 0);
 }
 
-li.left a:hover {
+a.left:hover {
     color: white;
     text-decoration: none;
     background-color: rgb(140, 0, 0);
     border-left: 3px solid rgb(0, 0, 0);
 }
-li.right a:hover {
+a.right:hover {
     color: white;
     text-decoration: none;
     background-color: rgb(140, 0, 0);
     border-right: 3px solid rgb(0, 0, 0)
+}
+
+@media screen and (max-width: 600px) {
+    .navigation a:not(:first-child) {
+        display: none;
+    }
+    .navigation a.collapsed-navigation-icon {
+      float: left;
+      display: block;
+    }
+}
+  
+@media screen and (max-width: 600px) {
+    .navigation.responsive {
+        position: relative;
+    }
+    .navigation.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .navigation.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
 }
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
