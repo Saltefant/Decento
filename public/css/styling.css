@@ -1,3 +1,23 @@
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 45px;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
+}
+
+h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
 body {
     margin:150px 0px 0px 0px;
 }
@@ -10,13 +30,13 @@ footer {
     height: 35px;
     bottom: 0px;
     background-color: rgb(190, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
     -webkit-box-shadow: 0px -4px 4px rgba(0, 0, 0, .5);   /* for Chrome (X-pos, Y-pos, blur)*/
     box-shadow: 0px -4px 4px rgb(0, 0, 0, .5);
 }
 
 footer p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
+    margin-top: 6px;
     text-align: center;
 }
 
@@ -38,9 +58,8 @@ footer p {
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-
 .logo {
-    position: fixed;
+    position: absolute;
     top: 35px;
     left: 40px;
     height: 80px;
@@ -55,6 +74,7 @@ footer p {
     position: fixed;
     overflow: hidden;
 }
+
 .banner {
     z-index: -3;
     top: 0px;
@@ -68,10 +88,9 @@ footer p {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-color: rgb(158, 0, 0);
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1150px) {
     .banner {
         background: rgb(255, 255, 255);
     }
@@ -125,7 +144,7 @@ nav {
     cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    font-size: 18px;
+    font-size: 22px;
     display: block;
     height: 100%;
     color: rgb(255, 255, 255);
@@ -185,7 +204,7 @@ a.right:hover {
     border-right: 3px solid rgb(0, 0, 0)
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1150px) {
     .navigation a {
         display: none;
     }
@@ -198,7 +217,7 @@ a.right:hover {
     }
 }
   
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1150px) {
     .navigation.responsive {
     }
 
