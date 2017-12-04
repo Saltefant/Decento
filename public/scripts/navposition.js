@@ -1,5 +1,6 @@
 //Navigation snaps to top - jQuery
 var mn = $("#navigation");
+var menuClicked = true;
   
 $(window).scroll(function() {
   
@@ -12,15 +13,22 @@ $(window).scroll(function() {
   
 });
 
-
 //Makes navigation responsive
 function ResponsiveFunction() {
-    var x = document.getElementById("navigation");
-    if (x.classList === "navigation") {
-        x.classList.addClass("responsive");
-    } else {
-        x.classList.removeClass("navigation");
-    }
+
+        /*var x = document.getElementById("navigation");
+        if (x.className === "navigation") {
+            x.classList.add("responsive");
+        } else {
+            x.classList.remove("responsive");
+        }*/
+        if(menuClicked) {
+        mn.addClass("responsive");
+        menuClicked = false;
+        } else {
+        mn.removeClass("responsive");
+        menuClicked = true;
+        }
 }
 
 //Login modal

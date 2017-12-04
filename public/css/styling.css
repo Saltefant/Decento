@@ -94,7 +94,7 @@ nav {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);
 }
 
-.removeJump {
+#removeJump {
     height: 30px;
 }
 
@@ -105,16 +105,10 @@ nav {
     background-color: rgb(126, 126, 126);
     margin: 0;
     padding: 0;
-    overflow: hidden;
     border-top: 1px solid rgb(0, 0, 0);
     border-bottom: 1px solid rgb(0, 0, 0);
     -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);   /* for Chrome (X-pos, Y-pos, blur)*/ 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, .5);
-}
-
-
-.navigation, .nav-scrolled, a, footer {
-    height: 30px;
 }
 
 .navigation .collapsed-navigation-icon {
@@ -130,12 +124,13 @@ nav {
     display: block;
     height: 100%;
     color: rgb(255, 255, 255);
-    padding: 6px 80px 0px 80px;
+    padding: 6px 80px 6px 80px;
     text-decoration: none;
     transition: 0.3s;
     border: 0px solid rgb(0,0,0);
 }
 
+/*
 a.left:focus {
     color: rgb(255,255,255);
     outline: none;
@@ -143,6 +138,7 @@ a.left:focus {
     background-color: rgb(140, 0, 0);
     border-left: 3px solid rgb(0, 0, 0)
 }
+
 a.right:focus {
     color: rgb(255,255,255);
     outline: none;
@@ -150,6 +146,7 @@ a.right:focus {
     background-color: rgb(140, 0, 0);
     border-left: 3px solid rgb(0, 0, 0)
 }
+*/
 
 a.left{
     float: left;
@@ -175,6 +172,7 @@ a.left:hover {
     background-color: rgb(140, 0, 0);
     border-left: 3px solid rgb(0, 0, 0);
 }
+
 a.right:hover {
     color: white;
     text-decoration: none;
@@ -182,25 +180,26 @@ a.right:hover {
     border-right: 3px solid rgb(0, 0, 0)
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1100px) {
     .navigation a:not(:first-child) {
         display: none;
     }
+
     .navigation a.collapsed-navigation-icon {
+      width: 100%;
       float: left;
       display: block;
+      text-align: left;
     }
 }
   
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1100px) {
     .navigation.responsive {
-        position: relative;
     }
-    .navigation.responsive .icon {
-      position: absolute;
-      right: 0;
-      top: 0;
+
+    .navigation.responsive .collapsed-navigation-icon {
     }
+
     .navigation.responsive a {
       float: none;
       display: block;
