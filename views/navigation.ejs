@@ -1,11 +1,18 @@
 <nav>
   <div id="removeJump">
     <div class="navigation" id="navigation">
-      <a class="collapsed-navigation-icon left" href="javascript:void(0);" onclick="ResponsiveFunction()">&#9776;</a>
-      <a class="left" href="/" tabindex="0">Home</a>
-      <a class="left" href="/projects" tabindex="0">Projects</a>
-      <a class="left" href="/profile" tabindex="0">Profile</a>
-      <a class="left leftend" href="/about" tabindex="0">About</a>
+      <a id="linkId" class="collapsed-navigation-icon left" onclick="ResponsiveFunction()">&#9776;</a>
+      <a class="left" href="/" tabindex="0">Nyheder</a>
+              <div class="dropdown">
+                <a class="dropbtn">Produkter &#9660;</a>
+                <div class="dropdown-content">
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+              </div>
+      <a class="left" href="/about" tabindex="0">Kontakt</a>
+      <a class="left leftend" href="/profile" tabindex="0">Upload</a>
       <a class="right rightend" onclick="document.getElementById('modalId').style.display='block'" cursor="pointer">Login</a>
     </div>
   </div>
