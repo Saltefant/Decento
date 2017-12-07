@@ -80,7 +80,6 @@ footer p {
 .mini-banner {
     float: left;
     height: 150px;
-    width: auto;
     z-index: -2;
     top: 0px;
     position: fixed;
@@ -377,7 +376,6 @@ span.psw {
 .display {
     height: 200px;
     width: 100%;
-    padding: 20px;
     background: rgb(90, 90, 90);
     display: flex;
     justify-content: center;
@@ -391,7 +389,7 @@ span.psw {
     width: 20%;
     min-width: 200px;
     max-width: 300px;
-    margin: 5px;
+    margin: 10px;
     border-radius: 10px;
     border: 1px solid rgb(0, 0, 0);
     overflow: hidden;
@@ -399,8 +397,8 @@ span.psw {
 }
 
 .display-item:hover {
-    min-width: 250px;
-    max-width: 350px;
+    min-width: 350px;
+    max-width: 450px;
     width: 22%;
 }
 
@@ -409,7 +407,7 @@ span.psw {
     margin-bottom: -5px;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1350px) {
     .display {
         display: block;
         justify-content: center;
