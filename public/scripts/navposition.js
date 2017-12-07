@@ -1,14 +1,17 @@
 //Navigation snaps to top - jQuery
 var mn = $("#navigation");
+var nl =$("#nav-logo");
 var menuClicked = true;
   
 $(window).scroll(function() {
   
     if ($(this).scrollTop() > 150) {
         mn.addClass("nav-scrolled");
+        nl.addClass("scrolled");
     }
     else {
         mn.removeClass("nav-scrolled");
+        nl.removeClass("scrolled");
     }
   
 });

@@ -178,7 +178,7 @@ nav {
     padding: 6px 70px 6px 70px;
     text-decoration: none;
     transition: 0.3s;
-    border: 0px solid rgb(0,0,0);
+    border: 0px solid rgb(40,40,40);
 }
 
 
@@ -200,12 +200,32 @@ a.right:focus {
 }
 */
 
-a.left{
+a.left {
     float: left;
     /* border-left: 1px solid rgb(0, 0, 0); */
 }
 
-a.right{
+a.left.hidden {
+    overflow: hidden;
+    padding: 0px 0px 0px 0px;
+    width: 0px;
+    height:40px;
+    background: rgb(255, 255, 255);
+    transition: 0.5s;
+    display: block;
+    /* border-left: 1px solid rgb(0, 0, 0); */
+}
+
+a.left.scrolled {
+    width: 40px;
+    /* border-left: 1px solid rgb(0, 0, 0); */
+}
+
+.nav-logo {
+    height: 40px;
+}
+
+a.right {
     float: right;
     /* border-right: 1px solid rgb(0, 0, 0); */
 }
@@ -219,17 +239,15 @@ a.rightend {
 }
 
 a.left:hover {
-    color: white;
     text-decoration: none;
     background-color: rgb(65, 65, 65);
-    border-left: 3px solid rgb(0, 0, 0);
+    border-left: 5px solid rgb(40, 40, 40);
 }
 
 a.right:hover {
-    color: white;
     text-decoration: none;
     background-color: rgb(65, 65, 65);
-    border-right: 3px solid rgb(0, 0, 0)
+    border-right: 5px solid rgb(40, 40, 40)
 }
 
 @media screen and (max-width: 1150px) {
@@ -243,13 +261,9 @@ a.right:hover {
       display: block;
       text-align: left;
     }
-}
-  
-@media screen and (max-width: 1150px) {
-    .navigation.responsive {
-    }
 
-    .navigation.responsive .collapsed-navigation-icon {
+    a.left.hidden {
+        display: none;
     }
 
     .navigation.responsive a {
