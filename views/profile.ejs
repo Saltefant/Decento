@@ -3,17 +3,15 @@
 <html>
 <head>
     <title>Profile</title>
-    <link rel="stylesheet" href="/css/styling.css">
-    <script src="/scripts/carousel.js"></script>
+<% include shared/head.ejs %>
 </head>
 
-<header>
-    <%- include header.ejs %>
-</header>
+<!-- HEADER -->
+<% include shared/header.ejs %>
 
-<nav>
-    <%- include navigation.ejs %>
-</nav>
+<!-- NAVIGATION -->
+<% include shared/navigation.ejs %>
+
 <!--
 <html>
 <head>
@@ -51,5 +49,7 @@
     </div>
 
 </div>
+<!-- FOOTER -->
+<%- include shared/footer.ejs %>
 </body>
 </html>

@@ -35,22 +35,46 @@ module.exports = function(app, passport) {
             res.render('signup.ejs', { message: req.flash('signupMessage') });
         });
 
-        app.get('/test', function(req, res) {
+        app.get('/kontakt', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('test.ejs');
+                    res.render('kontakt.ejs');
         });
 
-        app.get('/about', function(req, res) {
+        app.get('/cases', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('about.ejs');
+                    res.render('cases.ejs');
         });
 
-        app.get('/projects', function(req, res) {
+        app.get('/boligfoto', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('projects.ejs');
+                    res.render('boligfoto.ejs');
+        });
+        
+        app.get('/bilfoto', function(req, res) {
+            
+                    // render the page and pass in any flash data if it exists
+                    res.render('bilfoto.ejs');
+        });
+        
+        app.get('/produktfoto', function(req, res) {
+            
+                    // render the page and pass in any flash data if it exists
+                    res.render('produktfoto.ejs');
+        });
+
+        app.get('/bryllupsfoto', function(req, res) {
+            
+                    // render the page and pass in any flash data if it exists
+                    res.render('bryllupsfoto.ejs');
+        });
+
+        app.get('/portraetfoto', function(req, res) {
+            
+                    // render the page and pass in any flash data if it exists
+                    res.render('portraetfoto.ejs');
         });
     
         // process the signup form

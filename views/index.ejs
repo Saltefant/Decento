@@ -2,34 +2,60 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="/css/styling.css">
+    <title>Decento</title>
+<% include shared/head.ejs %>
     <script src="/scripts/carousel.js"></script>
 </head>
 
 <!-- HEADER -->
-<%- include header.ejs %>
+<% include shared/header.ejs %>
 
 <!-- NAVIGATION -->
-<%- include navigation.ejs %>
+<% include shared/navigation.ejs %>
 
 
-<body onLoad="showDivs();">
+<body>
     <div class="whiteout">
-        <div class="content-wrap">
-            <div class="carousel-container">
-                <img class="mySlides" src="/images/slides/slide01.jpg">
-                <img class="mySlides" src="/images/slides/slide02.jpg">
-                <img class="mySlides" src="/images/slides/slide03.jpg">
-
-                <div class="carousel-controls">
-                    <div class="leftArrow" onclick="plusDivs(-1)">&#10094;</div>
-                    <span class="roundButton" onclick="currentDiv(1)"></span>
-                    <span class="roundButton" onclick="currentDiv(2)"></span>
-                    <span class="roundButton" onclick="currentDiv(3)"></span>
-                    <div class="rightArrow" onclick="plusDivs(1)">&#10095;</div>
-                </div>
+            <div class="content-wrap">
+                <p style="text-align:center;">Med 10 års erfaring indenfor foto, grafik og generel kreativ udfoldelse i mange afskygninger, kan DECENTO tilbyde en bred variation af løsninger. <br>
+                <br>
+                Fra boligfoto til portrætfoto – vi klarer det hele. <br>
+                <br>
+                Klik på kategorierne for at se mere, og kontakt os i dag for en uforpligtende snak omkring netop din opgave.</p>
             </div>
+
+        <div class="display">
+            
+            <div class="display-item" onclick="location.href='/boligfoto';" style="cursor:pointer;">
+                <h4>Boligfoto</h4>
+                <img src="images/samples/boligfoto.jpg">
+            </div>
+
+            <div class="display-item" onclick="location.href='/bilfoto';" style="cursor:pointer;">
+                <h4>Bilfoto</h4>
+                <img src="images/samples/bilfoto.jpg">
+            </div>
+
+            <div class="display-item" onclick="location.href='/produktfoto';" style="cursor:pointer;">
+                <h4>Produktfoto</h4>
+                <img src="images/samples/produktfoto.jpg">
+            </div>
+
+            <div class="display-item" onclick="location.href='/bryllupsfoto';" style="cursor:pointer;">
+                <h4>Bryllupsfoto</h4>
+                <img src="images/samples/bryllupsfoto.jpg">
+            </div>
+            
+            <div class="display-item" onclick="location.href='/portraetfoto';" style="cursor:pointer;">
+                <h4>Portrætfoto</h4>
+                <img src="images/samples/portrætfoto.jpg">
+            </div>
+            
+        </div>
+    
+    
+    
+        <div class="content-wrap">
 
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
     
@@ -98,8 +124,8 @@
 </div>
 </div>
 
-<footer>
-        <p>Hello there footer</p>
-</footer>
+<!-- FOOTER -->
+<%- include shared/footer.ejs %>
+
 </body>
 </html>

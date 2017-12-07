@@ -2,17 +2,18 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="/css/styling.css">
+    <title>Login</title>
+<%- include shared/head.ejs %>
 </head>
-<header>
-    <%- include header.ejs %>
-</header>
-<nav>
-    <%- include navigation.ejs %>
-</nav>
+
+<!-- HEADER -->
+<% include shared/header.ejs %>
+
+<!-- NAVIGATION -->
+<% include shared/navigation.ejs %>
+    
 <body>
-<div class="container">
+<div class="content-wrap">
 
 <div class="col-sm-6 col-sm-offset-3">
 
@@ -45,5 +46,7 @@
 </div>
 
 </div>
+<!-- FOOTER -->
+<%- include shared/footer.ejs %>
 </body>
 </html>
