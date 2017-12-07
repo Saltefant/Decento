@@ -408,14 +408,23 @@ span.psw {
 }
 
 @media screen and (max-width: 1350px) {
+    
     .display {
         display: block;
         justify-content: center;
         height: auto;
     }
+
     .display-item {
+        max-width: 1350px;
+        width: 75%;
         margin: auto;
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+
+    .display-item:hover {
+        max-width: 1350px;
+        width: 90%;
     }
 }
