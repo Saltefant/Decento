@@ -202,7 +202,7 @@ a.right:focus {
 
 a.left {
     float: left;
-    /* border-left: 1px solid rgb(0, 0, 0); */
+    border-left: 1px solid rgb(0, 0, 0);
 }
 
 a.left.hidden {
@@ -211,14 +211,14 @@ a.left.hidden {
     width: 0px;
     height:40px;
     background: rgb(255, 255, 255);
-    transition: 0.5s;
+    transition: 0.3s;
     display: block;
-    /* border-left: 1px solid rgb(0, 0, 0); */
+    border-left: 1px solid rgb(0, 0, 0);
 }
 
 a.left.scrolled {
     width: 40px;
-    /* border-left: 1px solid rgb(0, 0, 0); */
+    border-left: 1px solid rgb(0, 0, 0);
 }
 
 .nav-logo {
@@ -227,15 +227,15 @@ a.left.scrolled {
 
 a.right {
     float: right;
-    /* border-right: 1px solid rgb(0, 0, 0); */
+    border-right: 1px solid rgb(0, 0, 0);
 }
 
 a.leftend {
-    /* border-right: 1px solid rgb(0, 0, 0); */
+    border-right: 1px solid rgb(0, 0, 0);
 }
 
 a.rightend {
-    /* border-right: 1px solid rgb(0, 0, 0); */
+    border-right: 1px solid rgb(0, 0, 0);
 }
 
 a.left:hover {
@@ -262,7 +262,7 @@ a.right:hover {
       text-align: left;
     }
 
-    a.left.hidden {
+    .hidefast {
         display: none;
     }
 
