@@ -175,7 +175,7 @@ nav {
     display: block;
     height: 28px;
     color: rgb(255, 255, 255);
-    padding: 6px 70px 6px 70px;
+    padding: 6px 65px 6px 65px;
     text-decoration: none;
     transition: 0.3s;
     border: 0px solid rgb(40,40,40);
@@ -261,6 +261,10 @@ a.right:hover {
       float: left;
       display: block;
       text-align: left;
+    }
+    
+    #removeJump {
+        height: 60px;
     }
 
     .hidefast {
