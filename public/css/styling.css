@@ -256,6 +256,7 @@ a.right:hover {
     }
 
     .navigation a.collapsed-navigation-icon {
+      height: 60px;
       width: 100%;
       float: left;
       display: block;
@@ -267,6 +268,8 @@ a.right:hover {
     }
 
     .navigation.responsive a {
+      font-size: 50px;
+      height: 60px;
       float: none;
       display: block;
       text-align: left;
