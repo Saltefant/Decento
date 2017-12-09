@@ -1,29 +1,20 @@
-var slideIndex = 1;
-showDivs(slideIndex);
+//Using JQuery UI
+$(document).ready(function () {
+  var delay = 7000,
+      fade = 17000;
+  var banners = $('.banner');
+  var len = banners.length;
+  var i = 0;
+  setInterval(cycle, delay);
 
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("roundButton");
-  if (n > x.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = x.length}
-
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";  
+  function cycle() {
+      $(banners[i % len]).hide("slide", {
+          direction: "left",
+          duration: 2500
+      });
+      $(banners[++i % len]).show("slide", {
+          direction: "right",
+          duration: 2500
+      });
   }
-
-  for (i = 0; i < dots.length; i++) {
-     dots[i].className = dots[i].className.replace(" roundButtonActive", "");
-  }
-  
-  x[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " roundButtonActive";
-}
+});

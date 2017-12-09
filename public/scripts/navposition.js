@@ -5,7 +5,7 @@ var menuClicked = true;
   
 $(window).scroll(function() {
   
-    if ($(this).scrollTop() > 150) {
+    if ($(this).scrollTop() > 225) {
         mn.addClass("nav-scrolled");
         nl.addClass("scrolled");
     }
