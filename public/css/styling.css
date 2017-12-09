@@ -90,7 +90,6 @@ footer .icon {
 }
 
 .whiteout {
-    
     overflow: hidden;
     width:100%;
     background-color: rgb(255, 255, 255);
@@ -132,7 +131,6 @@ footer .icon {
     z-index: -3;
     top: 0px;
     position: fixed;
-    overflow: hidden;
 }
 
 .white-banner.right {
@@ -163,6 +161,54 @@ footer .icon {
     position: relative;
     margin: auto;
     z-index: -2;
+    }
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//    CAROUSEL
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.carousel-area {
+    z-index: -5;
+    top:0px;
+    left:0px;
+    position: fixed;
+    width: 100%;
+    height: 225px;
+    overflow: hidden;
+}
+
+.banner {
+    width: 100%;
+    position:fixed;
+    z-index: -4;
+}
+
+#banner1 {
+}
+
+#banner2 {
+    display: none;
+}
+
+#banner3 {
+    display: none;
+}
+
+#banner4 {
+    display: none;
+}
+
+#banner5 {
+    display: none;
+}
+
+@media screen and (max-width: 1150px) {
+    
+    .carousel-area {
+        display: none;
     }
 }
 
@@ -494,52 +540,5 @@ span.psw {
     .display-item:hover {
         max-width: 1350px;
         width: 90%;
-    }
-}
-
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//    CAROUSEL
-//
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-.carousel-area {
-    z-index: -5;
-    top:0px;
-    left:0px;
-    position: fixed;
-    width: 100%;
-    overflow: hidden;
-}
-
-.banner {
-    width: 100%;
-    position:fixed;
-    z-index: -4;
-}
-
-#banner1 {
-}
-
-#banner2 {
-    display: none;
-}
-
-#banner3 {
-    display: none;
-}
-
-#banner4 {
-    display: none;
-}
-
-#banner5 {
-    display: none;
-}
-
-@media screen and (max-width: 1150px) {
-    
-    .carousel-area {
-        display: none;
     }
 }
