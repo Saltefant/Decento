@@ -197,7 +197,7 @@ footer .icon {
     left: 550px;
     right: 50px;
     min-width:855px;
-    position: absolute;
+    position: fixed;
     height: 225px;
     overflow: hidden;
     display: flex;
