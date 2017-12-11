@@ -8,37 +8,58 @@
         <a class="left" href="/" tabindex="0">Nyheder</a>
         <a class="left" href="/cases" tabindex="0">Cases</a>
         <a class="left" href="/kontakt" tabindex="0">Kontakt</a>
-        <a class="left leftend" href="/profile" tabindex="0">Upload</a>
-        <a class="right rightend" onclick="document.getElementById('modalId').style.display='block'" cursor="pointer"><img src="/images/SoMe icons/key.png" style="height:100%"></a>
+
+        <%try{ if (user.local.role){ %>
+        <a id="admin" href="/profile" tabindex="0"><%= user.local.username %></a> 
+        <a class="right rightend" href="/logout"><img src="/images/SoMe icons/nokey.png" style="height:100%" title="Logout"></a> 
+        <%}} catch(err) {%>
+          <a class="right rightend" onclick="document.getElementById('modalId').style.display='block'" cursor="pointer" title="Login"><img src="/images/SoMe icons/key.png" style="height:100%"></a> 
+        <%}%>
     </div>
   </div>
 </nav>
 
 <div id="modalId" class="modal">
     
-    <form class="modal-content animate" action="/login" method="post">
-      <div class="imgcontainer">
-        <span onclick="document.getElementById('modalId').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <img src="/images/logo.jpg" alt="Decento" class="avatar">
-      </div>
-  
-      <div class="container">
-        <label>Email</label>
-        <input type="text" placeholder="Enter email" name="email" required>
-  
-        <label>Password</label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-          
-        <button type="submit">Login</button>
-        <input type="checkbox" checked="checked"><label style="font-size:14px;">Remember me</label>
-      </div>
-  
+  <div class="modal-content animate">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modalId').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="/images/logo.jpg" alt="Decento" class="avatar">
+    </div>
+
+    <div class="container">
+
+      <%try { if (user.local.role){ %>
+                
+        <h3>You are already logged in as "<%= user.local.username %>"</h3>
+                            
+        <a href="/logout">Logout</a>
+                
+      <%}} catch(err) { %> 
+      
+      <form action="/login" method="post">
+        <label>Username</label>
+          <input type="text" class="form-control" name="username" required>
+            
+          <label>Password</label>
+          <input type="password" class="form-control" name="password" required>
+
+          <button type="submit">Login</button>
+      </form>
+
+      <p>Need an account? <a href="/signup">Signup</a></p>
+      <p>Or go <a href="/">home</a>.</p>
+    
       <div class="container" style="background-color:#f1f1f1">
         <button type="button" onclick="document.getElementById('modalId').style.display='none'" class="cancelbtn">Cancel</button>
         <span class="psw">Forgot <a href="#">password?</a></span>
       </div>
-    </form>
+
+      <%}%>
+
+    </div>
   </div>
+</div>
 
 
 

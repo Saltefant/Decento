@@ -23,31 +23,32 @@
     </style>
 </head> !-->
 <body>
-<div class="container">
+<div class="whiteout">
+    <div class="content-wrap">
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+            <h1>Profile Page</h1>
+            <a href="/logout">Logout</a>
+
+            <!-- LOCAL INFORMATION -->
+                    <h3>User information</h3>
+
+                        <p>
+                            <strong>id</strong>: <%= user._id %><br>
+                            <strong>username</strong>: <%= user.local.username %><br>
+                            <strong>role</strong>: <%= user.local.role %><br>
+                            <strong>password</strong>: <%= user.local.password %>
+                        </p>
+        
+    <% if (user.local.role === 'Admin'){ %>
+        <form action="/postNews" method="POST" id="newsForm">
+            <input type="text" placeholder="Overskrift" name="Overskrift">
+            <input name="myImage" type="file">
+            <textarea rows="10" name="TxtForm" form="newsForm" placeholder="Enter text here..."></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    <%}%>
+
     </div>
-
-    <div class="row">
-
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
-            </div>
-        </div>
-
-    </div>
-
 </div>
 <!-- FOOTER -->
 <%- include shared/footer.ejs %>

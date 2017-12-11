@@ -1,27 +1,30 @@
 // DECENTO - server.js 
-//Uploaded here: https://thawing-plains-77501.herokuapp.com/
+//Uploaded here: https://decento.herokuapp.com/
 
 // ======================================================================
 // Getting the required modules
-var express  = require('express');
-var app      = express();
-var port     = process.env.PORT || 8080;
-var mongoose = require('mongoose');
-var passport = require('passport');
-var flash    = require('connect-flash');
-
-var morgan       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var session      = require('express-session');
-
-var configDB = require('./config/database.js');
+const express   = require('express'),
+app             = express(),
+port            = process.env.PORT || 8080,
+mongoose        = require('mongoose'),
+passport        = require('passport'),
+flash           = require('connect-flash'),
+morgan          = require('morgan'),
+cookieParser    = require('cookie-parser'),
+bodyParser      = require('body-parser'),
+session         = require('express-session'),
+configDB        = require('./config/database.js');
 
 // configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
+/*
 mongoose.connect('mongodb://AdminUser:password@ds149954.mlab.com:49954/myfirstmongodb', {
     useMongoClient: true,
     /* other options */
+/*
 });
+*/
+
 
 require('./config/passport')(passport); // pass passport for configuration
 

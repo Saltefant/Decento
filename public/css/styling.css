@@ -1,4 +1,5 @@
 a {
+    font-family: 'Segoe UI', Optima, sans-serif;
     text-decoration: none;
     letter-spacing: 1px;
 }
@@ -29,24 +30,6 @@ h4 {
 }
 
 p {
-    letter-spacing: 1px;
-    font-family: 'Segoe UI', Optima, sans-serif;
-    font-size: 18px;
-}
-
-label {
-    letter-spacing: 1px;
-    font-family: 'Segoe UI', Optima, sans-serif;
-    font-size: 18px;
-}
-
-input {
-    letter-spacing: 1px;
-    font-family: 'Segoe UI', Optima, sans-serif;
-    font-size: 18px;
-}
-
-span {
     letter-spacing: 1px;
     font-family: 'Segoe UI', Optima, sans-serif;
     font-size: 18px;
@@ -296,6 +279,17 @@ nav {
     border: 0px solid rgb(40,40,40);
 }
 
+#admin {
+    float: left;
+    border-right: 1px solid rgb(0, 0, 0);
+    background: rgb(255, 125, 0);
+}
+
+#admin:hover {
+    background: rgb(150, 72, 0);
+    border-left: 5px solid rgb(40, 40, 40);
+}
+
 a.left {
     float: left;
     border-left: 1px solid rgb(0, 0, 0);
@@ -373,17 +367,19 @@ a.right:hover {
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//    MODAL LOGIN-WINDOW
+//    FORM / MODAL LOGIN-WINDOW
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Optima, sans-serif;
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(0, 0, 0);
     box-sizing: border-box;
 }
 
@@ -477,6 +473,38 @@ span.psw {
 .animate {
     -webkit-animation: animatezoom 0.3s;
     animation: animatezoom 0.3s
+}
+
+label {
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Optima, sans-serif;
+    font-size: 18px;
+}
+
+textarea {
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Optima, sans-serif;
+    font-size: 14px;
+    resize: none;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(0, 0, 0);
+    box-sizing: border-box;
+}
+
+span {
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Optima, sans-serif;
+    font-size: 18px;
+}
+
+.alert {
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Optima, sans-serif;
+    font-size: 18px;
+    color: rgb(190, 0, 0)
 }
 
 @-webkit-keyframes animatezoom {

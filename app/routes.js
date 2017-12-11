@@ -5,7 +5,9 @@ module.exports = function(app, passport) {
         // HOME PAGE (with login links) ========
         // =====================================
         app.get('/', function(req, res) {
-            res.render('index.ejs'); // load the index.ejs file
+            res.render('index.ejs', {
+                user : req.user // get the user out of session and pass to template
+            }); // load the index.ejs file
         });
     
         // =====================================
@@ -13,9 +15,11 @@ module.exports = function(app, passport) {
         // =====================================
         // show the login form
         app.get('/login', function(req, res) {
-    
             // render the page and pass in any flash data if it exists
-            res.render('login.ejs', { message: req.flash('loginMessage') }); 
+            res.render('login.ejs', { 
+                user : req.user,
+                message: req.flash('loginMessage') 
+            }); 
         });
     
         // process the login form
@@ -32,49 +36,66 @@ module.exports = function(app, passport) {
         app.get('/signup', function(req, res) {
     
             // render the page and pass in any flash data if it exists
-            res.render('signup.ejs', { message: req.flash('signupMessage') });
+            res.render('signup.ejs', { 
+                user : req.user,
+                message: req.flash('signupMessage') 
+            });
         });
 
         app.get('/kontakt', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('kontakt.ejs');
+                    res.render('kontakt.ejs', {
+                        user : req.user // get the user out of session and pass to template
+                    });
         });
 
         app.get('/cases', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('cases.ejs');
+                    res.render('cases.ejs', {
+                        user : req.user // get the user out of session and pass to template
+                    });
         });
 
         app.get('/boligfoto', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('boligfoto.ejs');
+                    res.render('boligfoto.ejs', {
+                        user : req.user // get the user out of session and pass to template
+                    });
         });
         
         app.get('/bilfoto', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('bilfoto.ejs');
+                    res.render('bilfoto.ejs', {
+                        user : req.user // get the user out of session and pass to template
+                    });
         });
         
         app.get('/produktfoto', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('produktfoto.ejs');
+                    res.render('produktfoto.ejs', {
+                        user : req.user // get the user out of session and pass to template
+                    });
         });
 
         app.get('/bryllupsfoto', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('bryllupsfoto.ejs');
+                    res.render('bryllupsfoto.ejs', {
+                        user : req.user // get the user out of session and pass to template
+                    });
         });
 
         app.get('/portraetfoto', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
-                    res.render('portraetfoto.ejs');
+                    res.render('portraetfoto.ejs', {
+                        user : req.user // get the user out of session and pass to template
+                    });
         });
     
         // process the signup form
