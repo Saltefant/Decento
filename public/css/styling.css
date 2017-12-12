@@ -588,3 +588,37 @@ span {
         width: 90%;
     }
 }
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//    NEWS
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.news-container {
+    width: 100%;
+    background: rgb(209, 209, 209);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+}
+
+.news-container p {
+    padding: 0px 10px 10px 10px; 
+}
+.news-container a {
+    padding: 0px 10px 10px 10px; 
+}
+
+.headline-wrap {
+    margin-top:-25px;
+    width: 100%;
+    background: rgb(140, 0, 0);
+}
+
+.headline-wrap h3 {
+    padding: 5px 10px 10px 10px; 
+}

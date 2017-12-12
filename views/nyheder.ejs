@@ -1,0 +1,40 @@
+<!-- test.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Decento - Nyheder</title>
+<% include shared/head.ejs %>
+</head>
+
+<!-- HEADER -->
+<% include shared/header.ejs %>
+
+<!-- NAVIGATION -->
+<% include shared/navigation.ejs %>
+
+<body>
+    <div class="whiteout">
+        <div class="content-wrap">
+            
+            <h1>Nyheder</h1>
+                <% for(var i=posts.length; i > 0; i--) {%>
+                        <div class="news-container">
+                                <div class="headline-block-left">
+                            <div class="headline-wrap">
+                                <h3><%= posts[i-1].local.headline %></h3>
+                            </div>
+                        </div>
+                            <p><%= posts[i-1].local.text %></p>
+                            <p>Oprettet: <%= posts[i-1].local.date %></p>
+                            <% try { if (user.local.role === 'Admin'){ %>
+                            <a href="/deletepost/<%= posts[i-1]._id %>">Delete</a>
+                            <%}}catch(err){}%>
+                        </div>
+                <% } %>
+        </div>
+    </div>
+
+<!-- FOOTER -->
+<%- include shared/footer.ejs %>
+</body>
+</html>

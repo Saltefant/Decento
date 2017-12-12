@@ -1,3 +1,6 @@
+var Post = require('../app/models/newspost');
+
+
 // app/routes.js
 module.exports = function(app, passport) {
     
@@ -9,6 +12,21 @@ module.exports = function(app, passport) {
                 user : req.user // get the user out of session and pass to template
             }); // load the index.ejs file
         });
+
+        app.get('/nyheder', function(req, res) {
+            Post.find((err, result) => {  
+                if (err) {
+                    res.render('nyheder.ejs', {
+                        user : req.user
+                });
+                } else {
+                    res.render('nyheder.ejs', {
+                        user : req.user,
+                        posts : result // get the user out of session and pass to template
+                    }); // load the index.ejs file
+                }
+            });
+        });
     
         // =====================================
         // LOGIN ===============================
@@ -18,7 +36,7 @@ module.exports = function(app, passport) {
             // render the page and pass in any flash data if it exists
             res.render('login.ejs', { 
                 user : req.user,
-                message: req.flash('loginMessage') 
+                message : req.flash('loginMessage') 
             }); 
         });
     
@@ -38,7 +56,7 @@ module.exports = function(app, passport) {
             // render the page and pass in any flash data if it exists
             res.render('signup.ejs', { 
                 user : req.user,
-                message: req.flash('signupMessage') 
+                message : req.flash('signupMessage') 
             });
         });
 
@@ -90,6 +108,13 @@ module.exports = function(app, passport) {
                     });
         });
 
+        app.get('/test/:somevalue', function(req, res) {
+                    // render the page and pass in any flash data if it exists
+                    res.render('test.ejs', {
+                        value : req.params.somevalue
+                    });
+        });
+
         app.get('/portraetfoto', function(req, res) {
             
                     // render the page and pass in any flash data if it exists
@@ -103,7 +128,37 @@ module.exports = function(app, passport) {
             successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
-        }));
+        })); 
+
+        app.post('/postnews', function (req, res) {
+            try{
+                if(req.user.local.role === "Admin") {
+
+                    newPost = new Post();
+                    var d = new Date();
+
+                    newPost.local.headline = req.body.headline;
+                    newPost.local.text = req.body.txtArea;
+                    newPost.local.date = `${d.getDate()}-${d.getMonth()}-${d.getFullYear()} @ ${d.getHours()}:${d.getMinutes()}`;
+                    
+                    newPost.save()
+                }
+                res.redirect('/nyheder');
+            } catch(err) {
+                res.redirect('/nyheder')
+        }
+        });
+
+        app.get('/deletepost/:id', function(req, res) {
+            try{
+            if(req.user.local.role === "Admin") {
+                Post.findByIdAndRemove(req.params.id, (err, result) => {
+                    res.redirect('/nyheder')
+                });
+            }} catch(err) {
+                res.redirect('/nyheder');
+            }        
+        });
     
         // =====================================
         // PROFILE SECTION =====================

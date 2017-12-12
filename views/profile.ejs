@@ -40,10 +40,10 @@
                         </p>
         
     <% if (user.local.role === 'Admin'){ %>
-        <form action="/postNews" method="POST" id="newsForm">
-            <input type="text" placeholder="Overskrift" name="Overskrift">
-            <input name="myImage" type="file">
-            <textarea rows="10" name="TxtForm" form="newsForm" placeholder="Enter text here..."></textarea>
+        <form action="/postnews" method="POST" id="newsForm">
+            <input type="text" placeholder="Overskrift" name="headline">
+            <!--<input name="myImage" type="file">-->
+            <textarea rows="10" name="txtArea" form="newsForm" placeholder="Enter text here..."></textarea>
             <button type="submit">Submit</button>
         </form>
     <%}%>
