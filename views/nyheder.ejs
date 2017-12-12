@@ -19,13 +19,12 @@
             <h1>Nyheder</h1>
                 <% for(var i=posts.length; i > 0; i--) {%>
                         <div class="news-container">
-                                <div class="headline-block-left">
                             <div class="headline-wrap">
                                 <h3><%= posts[i-1].local.headline %></h3>
+                                <p>Oprettet: <%= posts[i-1].local.date %></p>
                             </div>
-                        </div>
-                            <p><%= posts[i-1].local.text %></p>
-                            <p>Oprettet: <%= posts[i-1].local.date %></p>
+                            <div class="pre-line"><p><%= posts[i-1].local.text %></p></div>
+                            
                             <% try { if (user.local.role === 'Admin'){ %>
                             <a href="/deletepost/<%= posts[i-1]._id %>">Delete</a>
                             <%}}catch(err){}%>

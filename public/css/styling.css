@@ -603,22 +603,32 @@ span {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 40px;
-    padding-bottom: 10px;
+}
+
+.pre-line {
+    white-space: pre-line;
 }
 
 .news-container p {
-    padding: 0px 10px 10px 10px; 
+    padding: 5px 10px 10px 30px; 
 }
 .news-container a {
-    padding: 0px 10px 10px 10px; 
+    padding: 0px 10px 10px 30px; 
 }
 
 .headline-wrap {
-    margin-top:-25px;
+    padding: 20px 0px 20px 0px;
     width: 100%;
     background: rgb(140, 0, 0);
 }
 
 .headline-wrap h3 {
-    padding: 5px 10px 10px 10px; 
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 30px; 
 }
+.headline-wrap p {
+    margin: 0px 0px -10px 0px;
+}
+
+

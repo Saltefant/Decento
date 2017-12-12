@@ -139,7 +139,7 @@ module.exports = function(app, passport) {
 
                     newPost.local.headline = req.body.headline;
                     newPost.local.text = req.body.txtArea;
-                    newPost.local.date = `${d.getDate()}-${d.getMonth()}-${d.getFullYear()} @ ${d.getHours()}:${d.getMinutes()}`;
+                    newPost.local.date = `${d.getDate()}-${d.getMonth()}-${d.getFullYear()} Kl. ${d.getHours()}:${d.getMinutes()}`;
                     
                     newPost.save()
                 }
