@@ -10,7 +10,7 @@
         <a class="left" href="/kontakt" tabindex="0">Kontakt</a>
 
         <%try{ if (user.local.role){ %>
-        <a id="admin" href="/profile" tabindex="0"><%= user.local.username %></a> 
+        <a class="left" id="admin" href="/profile" tabindex="0"><%= user.local.username %></a> 
         <a class="right rightend" href="/logout"><img src="/images/SoMe icons/nokey.png" style="height:100%" title="Logout"></a> 
         <%}} catch(err) {%>
           <a class="right rightend" onclick="document.getElementById('modalId').style.display='block'" cursor="pointer" title="Login"><img src="/images/SoMe icons/key.png" style="height:100%"></a> 

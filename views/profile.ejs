@@ -38,6 +38,10 @@
                             <strong>role</strong>: <%= user.local.role %><br>
                             <strong>password</strong>: <%= user.local.password %>
                         </p>
+
+                        <%if (message.length > 0) { %>
+                            <div class="alert"><%= message %></div>
+                        <% } %>
         
     <% if (user.local.role === 'Admin'){ %>
         <form action="/postnews" method="POST" id="newsForm">

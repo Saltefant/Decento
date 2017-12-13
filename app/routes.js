@@ -1,8 +1,44 @@
 var Post = require('../app/models/newspost');
+var ImagePost = require('../app/models/imagepost');
 
 
 // app/routes.js
 module.exports = function(app, passport) {
+
+                                                    var multer  = require('multer');
+                                                    var upload = multer({ dest: 'upload/'});
+                                                    var fs = require('fs');
+                                                    
+                                                    /** Permissible loading a single file, 
+                                                        the value of the attribute "name" in the form of "recfile". **/
+                                                    var type = upload.single('recfile');
+                                                    
+                                                    app.post('/upload', type, function (req,res) {
+                                                    
+                                                    /** When using the "single"
+                                                         data come in "req.file" regardless of the attribute "name". **/
+                                                    var tmp_path = req.file.path;
+                                                    
+                                                    /** The original name of the uploaded file
+                                                         stored in the variable "originalname". **/
+                                                    var target_path = 'uploads/' + req.file.originalname;
+                                                    
+                                                    /** A better way to copy the uploaded file. **/
+                                                    var src = fs.createReadStream(tmp_path);
+                                                    var dest = fs.createWriteStream(target_path);
+                                                    src.pipe(dest);
+                                                    
+
+                                                    // IMAGE TO MONGO
+                                                    var newItem = new ImagePost();
+                                                    newItem.img.data = fs.readFileSync(req.file.path)
+                                                    newItem.img.contentType = 'image/png';
+                                                    newItem.save(); 
+                                                    
+                                                    src.on('end', function() { res.render('index.ejs'); });
+                                                    src.on('error', function(err) { res.render('index.ejs'); });
+                                                    
+                                                    });
     
         // =====================================
         // HOME PAGE (with login links) ========
@@ -139,13 +175,25 @@ module.exports = function(app, passport) {
 
                     newPost.local.headline = req.body.headline;
                     newPost.local.text = req.body.txtArea;
-                    newPost.local.date = `${d.getDate()}-${d.getMonth()}-${d.getFullYear()} Kl. ${d.getHours()}:${d.getMinutes()}`;
+
+                    function addZero(i) {
+                        if (i < 10) {
+                            i = "0" + i;
+                        }
+                        return i;}
+
+                    newPost.local.date = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
                     
                     newPost.save()
-                }
-                res.redirect('/nyheder');
-            } catch(err) {
-                res.redirect('/nyheder')
+                    res.render('profile.ejs', {
+                        user : req.user,
+                        message : 'Nyheden blev oprettet!'
+                    });
+                } else {
+                res.redirect('/login');
+            }} catch(err) {
+                console.log(err);
+                res.redirect('/login')
         }
         });
 
@@ -155,8 +203,11 @@ module.exports = function(app, passport) {
                 Post.findByIdAndRemove(req.params.id, (err, result) => {
                     res.redirect('/nyheder')
                 });
+            } else {
+                res.redirect('/login')
             }} catch(err) {
-                res.redirect('/nyheder');
+                console.log(err);
+                res.redirect('/login');
             }        
         });
     
@@ -167,7 +218,8 @@ module.exports = function(app, passport) {
         // we will use route middleware to verify this (the isLoggedIn function)
         app.get('/profile', isLoggedIn, function(req, res) {
             res.render('profile.ejs', {
-                user : req.user // get the user out of session and pass to template
+                user : req.user, // get the user out of session and pass to template
+                message : ''
             });
         });
     

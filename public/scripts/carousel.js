@@ -1,7 +1,6 @@
 //Using JQuery UI
 $(document).ready(function () {
-  var delay = 7000,
-      fade = 17000;
+  var delay = 10000;
   var banners = $('.banner');
   var len = banners.length;
   var i = 0;
@@ -10,11 +9,11 @@ $(document).ready(function () {
   function cycle() {
       $(banners[i % len]).hide("slide", {
           direction: "left",
-          duration: 2500
+          duration: 3000
       });
       $(banners[++i % len]).show("slide", {
           direction: "right",
-          duration: 2500
+          duration: 3000
       });
   }
 });
