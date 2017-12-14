@@ -8,7 +8,8 @@ var newspostSchema = mongoose.Schema({
     local            : {
         headline     : String,
         text         : String,
-        date         : String
+        date         : String,
+        imagePath    : String
     }
     
 });

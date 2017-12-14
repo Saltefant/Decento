@@ -44,11 +44,17 @@
                         <% } %>
         
     <% if (user.local.role === 'Admin'){ %>
-        <form action="/postnews" method="POST" id="newsForm">
+
+        <h1>Opret nyhed</h1>
+
+        <form action="/postnews" method="POST" id="newsForm" enctype="multipart/form-data">
+            <label>Tilføj et billede:</label><br><br>
+            <input type="file" name='recfile' placeholder="Tilføj et billede"/><br><br>
+            <label>Overskrift:</label>
             <input type="text" placeholder="Overskrift" name="headline">
-            <!--<input name="myImage" type="file">-->
+            <label>Tekst:</label>
             <textarea rows="10" name="txtArea" form="newsForm" placeholder="Enter text here..."></textarea>
-            <button type="submit">Submit</button>
+            <button type="submit">Opret</button>
         </form>
     <%}%>
 

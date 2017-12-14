@@ -1,44 +1,71 @@
 var Post = require('../app/models/newspost');
 var ImagePost = require('../app/models/imagepost');
 
+//To uplaod image
+var fs = require('fs');
+var multer  = require('multer');
+var upload = multer({ dest: 'upload/'});
+var type = upload.single('recfile');
+
 
 // app/routes.js
 module.exports = function(app, passport) {
 
-                                                    var multer  = require('multer');
-                                                    var upload = multer({ dest: 'upload/'});
-                                                    var fs = require('fs');
                                                     
-                                                    /** Permissible loading a single file, 
-                                                        the value of the attribute "name" in the form of "recfile". **/
-                                                    var type = upload.single('recfile');
-                                                    
-                                                    app.post('/upload', type, function (req,res) {
-                                                    
-                                                    /** When using the "single"
-                                                         data come in "req.file" regardless of the attribute "name". **/
-                                                    var tmp_path = req.file.path;
-                                                    
-                                                    /** The original name of the uploaded file
-                                                         stored in the variable "originalname". **/
-                                                    var target_path = 'uploads/' + req.file.originalname;
-                                                    
-                                                    /** A better way to copy the uploaded file. **/
-                                                    var src = fs.createReadStream(tmp_path);
-                                                    var dest = fs.createWriteStream(target_path);
-                                                    src.pipe(dest);
-                                                    
+        /** Permissible loading a single file, 
+            the value of the attribute "name" in the form of "recfile". **/
+        app.post('/postnews', type, function (req, res) {
+            
+            try{
+                if(req.user.local.role === "Admin") {
+        
+                    newPost = new Post();
+                    d = new Date();
+        /** When using the "single"
+             data come in "req.file" regardless of the attribute "name". **/
+        
+                try {
+                    var tmp_path = req.file.path;
+                    
+                    /** The original name of the uploaded file
+                         stored in the variable "originalname". **/
+                    var target_path = 'public/uploads/' + req.file.originalname;
+                    
+                    /** A better way to copy the uploaded file. **/
+                    var src = fs.createReadStream(tmp_path);
+                    var dest = fs.createWriteStream(target_path);
+                    src.pipe(dest);
+                    
+                    newPost.local.imagePath = 'uploads/' + req.file.originalname;
+                
+                } catch(err) {
+                    newPost.local.imagePath = '';
+                }
+        
+                newPost.local.headline = req.body.headline;
+                newPost.local.text = req.body.txtArea;
+    
+                function addZero(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;}
+    
+                newPost.local.date = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
+                
+                newPost.save()
+                res.render('profile.ejs', {
+                    user : req.user,
+                    message : 'Nyheden blev oprettet!'
+                });
+                } else {
+                res.redirect('/login');
+            }} catch(err) {
+                console.log(err);
+                res.redirect('/login')
+            }
+        });
 
-                                                    // IMAGE TO MONGO
-                                                    var newItem = new ImagePost();
-                                                    newItem.img.data = fs.readFileSync(req.file.path)
-                                                    newItem.img.contentType = 'image/png';
-                                                    newItem.save(); 
-                                                    
-                                                    src.on('end', function() { res.render('index.ejs'); });
-                                                    src.on('error', function(err) { res.render('index.ejs'); });
-                                                    
-                                                    });
     
         // =====================================
         // HOME PAGE (with login links) ========
@@ -166,12 +193,13 @@ module.exports = function(app, passport) {
             failureFlash : true // allow flash messages
         })); 
 
+        /*
         app.post('/postnews', function (req, res) {
             try{
                 if(req.user.local.role === "Admin") {
 
                     newPost = new Post();
-                    var d = new Date();
+                    d = new Date();
 
                     newPost.local.headline = req.body.headline;
                     newPost.local.text = req.body.txtArea;
@@ -196,6 +224,7 @@ module.exports = function(app, passport) {
                 res.redirect('/login')
         }
         });
+        */
 
         app.get('/deletepost/:id', function(req, res) {
             try{

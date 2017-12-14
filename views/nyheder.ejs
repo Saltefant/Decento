@@ -23,7 +23,12 @@
                                 <h3><%= posts[i-1].local.headline %></h3>
                                 <p>Oprettet: <%= posts[i-1].local.date %></p>
                             </div>
-                            <div class="pre-line"><p><%= posts[i-1].local.text %></p></div>
+                            <div class="pre-line">
+                                <%if(posts[i-1].local.imagePath.length > 0) {%>
+                                    <img src="<%= posts[i-1].local.imagePath %>">
+                                <%}%>
+                                <p><%= posts[i-1].local.text %></p>
+                            </div>
                             <% try { if (user.local.role === 'Admin'){ %>
                             <br>
                             <a href="/deletepost/<%= posts[i-1]._id %>">Delete</a>
