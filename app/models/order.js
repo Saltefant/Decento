@@ -3,16 +3,16 @@
 const mongoose = require('mongoose');
 
 // define the schema for our user model
-var newspostSchema = mongoose.Schema({
+var orderSchema = mongoose.Schema({
 
-    newspost         : {
-        headline     : String,
+    order            : {
+        customerId   : String,
+        ordertype    : String,
         text         : String,
-        date         : String,
-        imagePath    : String
+        date         : String
     }
     
 });
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Newspost', newspostSchema);
+module.exports = mongoose.model('Order', orderSchema);

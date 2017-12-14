@@ -1,0 +1,40 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Profile</title>
+<% include shared/head.ejs %>
+</head>
+
+<!-- HEADER -->
+<% include shared/header.ejs %>
+
+<!-- NAVIGATION -->
+<% include shared/navigation.ejs %>
+
+<body>
+<div class="whiteout">
+    <div class="content-wrap">
+
+            <h1>Ordrer</h1>
+            <a href="/logout">Logout</a>
+            
+
+        <%try{ for(var i=orders.length; i > 0; i--) {%>
+            <div class="news-container">
+                <div class="headline-wrap">
+                    <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
+                </div>
+                    <p>Detaljer: <%= orders[i-1].order.text %></p>
+                    <p>Oprettet: <%= orders[i-1].order.date %></p>
+                    <p>Bestilt af: <%= orders[i-1].order.customerId %></p>
+            </div>
+                    
+        <% }} catch(err){} %>
+
+    </div>
+</div>
+<!-- FOOTER -->
+<%- include shared/footer.ejs %>
+</body>
+</html>

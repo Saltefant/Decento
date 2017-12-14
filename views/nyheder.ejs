@@ -20,14 +20,14 @@
                 <% for(var i=posts.length; i > 0; i--) {%>
                         <div class="news-container">
                             <div class="headline-wrap">
-                                <h3><%= posts[i-1].local.headline %></h3>
-                                <p>Oprettet: <%= posts[i-1].local.date %></p>
+                                <h3><%= posts[i-1].newspost.headline %></h3>
+                                <p>Oprettet: <%= posts[i-1].newspost.date %></p>
                             </div>
                             <div class="pre-line">
-                                <%if(posts[i-1].local.imagePath.length > 0) {%>
-                                    <img src="<%= posts[i-1].local.imagePath %>">
+                                <%if(posts[i-1].newspost.imagePath.length > 0) {%>
+                                    <img src="<%= posts[i-1].newspost.imagePath %>">
                                 <%}%>
-                                <p><%= posts[i-1].local.text %></p>
+                                <p><%= posts[i-1].newspost.text %></p>
                             </div>
                             <% try { if (user.local.role === 'Admin'){ %>
                             <br>

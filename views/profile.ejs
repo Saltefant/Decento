@@ -39,21 +39,54 @@
                             <strong>password</strong>: <%= user.local.password %>
                         </p>
 
-                        <%if (message.length > 0) { %>
+                        <%try{if (message.length > 0) { %>
                             <div class="alert"><%= message %></div>
-                        <% } %>
+                        <% }} catch(err) {} %>
         
     <% if (user.local.role === 'Admin'){ %>
+
+        <a href="/alleordrer">Se alle ordrer</a>
 
         <h1>Opret nyhed</h1>
 
         <form action="/postnews" method="POST" id="newsForm" enctype="multipart/form-data">
-            <label>Tilføj et billede:</label><br><br>
-            <input type="file" name='recfile' placeholder="Tilføj et billede"/><br><br>
+            <label>Tilføj et billede:</label>
+            <br><br>
+            <input type="file" name='recfile' placeholder="Tilføj et billede"/>
+            <br><br>
             <label>Overskrift:</label>
             <input type="text" placeholder="Overskrift" name="headline">
             <label>Tekst:</label>
-            <textarea rows="10" name="txtArea" form="newsForm" placeholder="Enter text here..."></textarea>
+            <textarea rows="10" name="txtArea" form="newsForm" placeholder="Tilføj tekst her..."></textarea>
+            <button type="submit">Opret</button>
+        </form>
+    <%}%>
+
+    <% if (user.local.role === 'Firma' || user.local.role === 'Bruger'){ %>
+        
+
+        <%try{ for(var i=orders.length; i > 0; i--) {%>
+            
+                    <h3><%= orders[i-1].order.ordertype %></h3>
+                    
+        <% }} catch(err){} %>
+
+        <a href="/ordrer/<%= user._id %>">Se ordrer</a>
+
+        <h1>Opret ordre</h1>
+
+        <form action="/placeorder" method="POST" id="orderForm">
+            <input type="hidden" placeholder="Overskrift" name="userId" value="<%= user._id %>">
+            <label>Type:</label>
+            <br><br>
+            <select name="type" style="width:100%;padding: 13px 13px 13px 13px;" required>
+                <option value="Ejendomsfoto">Ejendomsfoto</option>
+                <option value="Produktfoto">Produktfoto</option>
+                <option value="Andet">Andet</option>
+            </select> 
+            <br><br>
+            <label>Detaljer:</label>
+            <textarea rows="10" name="txtArea" form="orderForm" placeholder="Tilføj detaljer om din ordre..."></textarea>
             <button type="submit">Opret</button>
         </form>
     <%}%>

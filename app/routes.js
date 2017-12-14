@@ -1,5 +1,5 @@
 var Post = require('../app/models/newspost');
-var ImagePost = require('../app/models/imagepost');
+var Order = require('../app/models/order');
 
 //To uplaod image
 var fs = require('fs');
@@ -11,7 +11,45 @@ var type = upload.single('recfile');
 // app/routes.js
 module.exports = function(app, passport) {
 
-                                                    
+        /*
+        app.post('/placeorder', function (req, res) {
+            newOrder = new Order();
+
+            newOrder.listing.details = 'TEST';
+            newOrder.listing.type = 'TEST';
+            newOrder.listing.customer = 'TEST';
+            //newOrder.order.type = req.body.type;
+            //newOrder.order.details = req.body.txtArea;
+            //newOrder.order.customer = 'something';
+            newOrder.save();
+        });
+        */
+
+        app.post('/placeorder', type, function (req, res) {
+            
+                newOrder = new Order();
+                d = new Date();
+
+                newOrder.order.customerId = req.body.userId;
+                newOrder.order.ordertype = req.body.type;
+                newOrder.order.text = req.body.txtArea;
+
+                function addZero(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;}
+    
+                newOrder.order.date = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
+                
+                newOrder.save();
+
+                res.render('index.ejs', {
+                    user : req.user,
+                    message : "Ordren er oprettet!"
+                });
+        });
+
         /** Permissible loading a single file, 
             the value of the attribute "name" in the form of "recfile". **/
         app.post('/postnews', type, function (req, res) {
@@ -36,14 +74,14 @@ module.exports = function(app, passport) {
                     var dest = fs.createWriteStream(target_path);
                     src.pipe(dest);
                     
-                    newPost.local.imagePath = 'uploads/' + req.file.originalname;
+                    newPost.newspost.imagePath = 'uploads/' + req.file.originalname;
                 
                 } catch(err) {
-                    newPost.local.imagePath = '';
+                    newPost.newspost.imagePath = '';
                 }
         
-                newPost.local.headline = req.body.headline;
-                newPost.local.text = req.body.txtArea;
+                newPost.newspost.headline = req.body.headline;
+                newPost.newspost.text = req.body.txtArea;
     
                 function addZero(i) {
                     if (i < 10) {
@@ -51,9 +89,10 @@ module.exports = function(app, passport) {
                     }
                     return i;}
     
-                newPost.local.date = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
+                newPost.newspost.date = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
                 
-                newPost.save()
+                newPost.save();
+
                 res.render('profile.ejs', {
                     user : req.user,
                     message : 'Nyheden blev oprettet!'
@@ -251,6 +290,49 @@ module.exports = function(app, passport) {
                 message : ''
             });
         });
+
+        app.get('/ordrer/:id', isLoggedIn, function(req, res) {
+            //{ 'order.customerId': '5a31adc04c3cbf0860116616' },
+            Order.find({ 'order.customerId': req.params.id }, (err, result) => {  
+                if (err) {
+                    res.render('profile.ejs', {
+                        user : req.user, // get the user out of session and pass to template
+                        message : 'error'
+                });
+                } else {
+                    res.render('ordrer.ejs', {
+                        user : req.user,
+                        orders : result // get the user out of session and pass to template
+                    }); // load the index.ejs file
+                }
+            });
+        });
+
+        app.get('/alleordrer/', isLoggedIn, function(req, res) {
+            
+            try{
+                        if(req.user.local.role === "Admin") {
+                            Order.find((err, result) => {  
+                            if (err) {
+                                res.render('profile.ejs', {
+                                    user : req.user, // get the user out of session and pass to template
+                                    message : 'error'
+                                });
+                            } else {
+                                res.render('alleordrer.ejs', {
+                                    user : req.user,
+                                    orders : result
+                                }); 
+                            }
+                            });
+                        } else {
+                            res.redirect('/profile');
+                }} catch(err) {
+            res.render('login.ejs', {
+                user : req.user
+            }); 
+        }
+        });
     
         // =====================================
         // LOGOUT ==============================
@@ -270,6 +352,6 @@ module.exports = function(app, passport) {
     
         // if they aren't redirect them to the home page
         res.redirect('/login');
-    }
+    };
     
     
