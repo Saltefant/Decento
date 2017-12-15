@@ -27,7 +27,7 @@ module.exports = function(app, passport) {
     // =====================================
 
     app.post('/placeorder', type, function (req, res) {
-        
+        try {
         newOrder = new Order();
         d = new Date();
 
@@ -45,13 +45,11 @@ module.exports = function(app, passport) {
         newOrder.order.date = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
         
         newOrder.save();
-        Order.find({ 'order.customerId': req.user._id }, (err, result) => {
-            res.render('profile.ejs', {
-                user : req.user,
-                message : "Ordren er oprettet!",
-                orders : result
-            }); 
-        });
+        
+        res.redirect('/profile/Din ordre blev oprettet!/'); 
+        } catch(err) {
+        res.redirect('/profile/Der gik noget galt!/');     
+        }
     });
 
     // =====================================
@@ -338,6 +336,24 @@ module.exports = function(app, passport) {
                 res.render('profile.ejs', {
                     user : req.user,
                     orders : result // get the user out of session and pass to template
+                }); // load the index.ejs file
+            }
+        });
+    });
+
+    app.get('/profile/:message', isLoggedIn, function(req, res) {
+        //{ 'order.customerId': '5a31adc04c3cbf0860116616' },
+        Order.find({ 'order.customerId': req.user._id }, (err, result) => {  
+            if (err) {
+                res.render('profile.ejs', {
+                    user : req.user, // get the user out of session and pass to template
+                    message : 'error'
+            });
+            } else {
+                res.render('profile.ejs', {
+                    user : req.user,
+                    orders : result,
+                    message : req.params.message // get the user out of session and pass to template
                 }); // load the index.ejs file
             }
         });
