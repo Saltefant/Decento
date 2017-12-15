@@ -438,6 +438,11 @@ img.avatar {
 .container {
     padding: 16px;
 }
+.container-bottom {
+    background-color:rgb(226, 226, 226);
+    margin: 0px -16px -16px -16px;
+    padding: 16px;
+}
 
 span.psw {
     float: right;

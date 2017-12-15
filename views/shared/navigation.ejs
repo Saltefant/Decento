@@ -31,14 +31,14 @@
 
       <%try { if (user.local.role){ %>
                 
-        <h3>You are already logged in as "<%= user.local.username %>"</h3>
+        <h3>Du er allerede logget ind som "<%= user.local.username %>"</h3>
                             
         <a href="/logout">Logout</a>
                 
       <%}} catch(err) { %> 
       
       <form action="/login" method="post">
-        <label>Username</label>
+        <label>Brugernavn</label>
           <input type="text" class="form-control" name="username" required>
             
           <label>Password</label>
@@ -47,12 +47,11 @@
           <button type="submit">Login</button>
       </form>
 
-      <p>Need an account? <a href="/signup">Signup</a></p>
-      <p>Or go <a href="/">home</a>.</p>
+      <p>Brug for en konto? <a href="/signup">Opret dig</a></p>
     
-      <div class="container" style="background-color:#f1f1f1">
+      <div class="container-bottom">
         <button type="button" onclick="document.getElementById('modalId').style.display='none'" class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
+        <span class="psw">Glemt <a href="#">kodeord?</a></span>
       </div>
 
       <%}%>

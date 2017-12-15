@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
+    <title>Decento - Opret bruger</title>
     <% include shared/head.ejs %>
 </head>
 
@@ -17,7 +17,7 @@
 
 <div class="col-sm-6 col-sm-offset-3">
 
-    <h1><span class="fa fa-sign-in"></span> Signup</h1>
+    <h1><span class="fa fa-sign-in"></span>Opret dig som bruger</h1>
 
     <!-- show any messages that come back with authentication -->
     <% if (message.length > 0) { %>
@@ -35,19 +35,19 @@
             <input type="password" class="form-control" name="password" required>
         </div>
         <div class="form-group">
-            <label>Role</label><br>
+            <label>Type</label><br>
             <select name="role" style="width:100%;padding: 13px 13px 13px 13px;" required>
                 <option value="Bruger">Bruger</option>
                 <option value="Firma">Firma</option>
             </select> 
         </div>
-        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        <button type="submit" class="btn btn-warning btn-lg">Opret bruger</button>
     </form>
 
     <hr>
 
-    <p>Already have an account? <a href="/login">Login</a></p>
-    <p>Or go <a href="/">home</a>.</p>
+    <p>Har du allerede en konto? <a href="/login">Login</a></p>
+    <p>Eller gå til <a href="/">startsiden</a>.</p>
 
 </div>
 
