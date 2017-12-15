@@ -26,25 +26,25 @@
 <div class="whiteout">
     <div class="content-wrap">
 
-            <h1>Profile Page</h1>
-            <a href="/logout">Logout</a>
-
-            <!-- LOCAL INFORMATION -->
-                    <h3>User information</h3>
-
-                        <p>
-                            <strong>id</strong>: <%= user._id %><br>
-                            <strong>username</strong>: <%= user.local.username %><br>
-                            <strong>role</strong>: <%= user.local.role %><br>
-                            <strong>password</strong>: <%= user.local.password %>
-                        </p>
-
-                        <%try{if (message.length > 0) { %>
-                            <div class="alert"><%= message %></div>
-                        <% }} catch(err) {} %>
+        <h1>Profil</h1>
+        <a href="/logout">Logout</a>
+            <p>
+                <strong>id</strong>: <%= user._id %><br>
+                <strong>username</strong>: <%= user.local.username %><br>
+                <strong>role</strong>: <%= user.local.role %><br>
+                <strong>password</strong>: <%= user.local.password %>
+            </p>
         
-    <% if (user.local.role === 'Admin'){ %>
+            <%try{if (message.length > 0) { %>
+                <div class="alert"><%= message %></div>
+            <% }} catch(err) {} %>
 
+      
+
+        
+    
+    <!-- HVIS ADMIN -->
+    <% if (user.local.role === 'Admin'){ %>
         <a href="/alleordrer">Se alle ordrer</a>
 
         <h1>Opret nyhed</h1>
@@ -62,17 +62,9 @@
         </form>
     <%}%>
 
+    <!-- HVIS BRUGER -->
     <% if (user.local.role === 'Firma' || user.local.role === 'Bruger'){ %>
         
-
-        <%try{ for(var i=orders.length; i > 0; i--) {%>
-            
-                    <h3><%= orders[i-1].order.ordertype %></h3>
-                    
-        <% }} catch(err){} %>
-
-        <a href="/ordrer/<%= user._id %>">Se ordrer</a>
-
         <h1>Opret ordre</h1>
 
         <form action="/placeorder" method="POST" id="orderForm">
@@ -89,6 +81,23 @@
             <textarea rows="10" name="txtArea" form="orderForm" placeholder="Tilføj detaljer om din ordre..."></textarea>
             <button type="submit">Opret</button>
         </form>
+        <br><br>
+        <h1>Dine ordrer:</h1>
+        <%try{ for(var i=orders.length; i > 0; i--) {%>
+            
+                        <div class="news-container">
+                            <div class="headline-wrap">
+                                <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
+                            </div>
+                                <p>Ordre ID: <%= orders[i-1]._id %></p>
+                                <p>Detaljer: <%= orders[i-1].order.text %></p>
+                                <p>Oprettet: <%= orders[i-1].order.date %></p>
+                                <p>Status: <%= orders[i-1].order.status %></p>
+                                <br>
+                                <a href="/deleteorder/<%= orders[i-1].order.customerId %>/<%= orders[i-1]._id %>">Slet denne ordre</a>
+                        </div>
+                                
+        <% }} catch(err){} %>
     <%}%>
 
     </div>

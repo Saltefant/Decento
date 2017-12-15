@@ -16,18 +16,22 @@
 <div class="whiteout">
     <div class="content-wrap">
 
-            <h1>Ordrer</h1>
-            <a href="/logout">Logout</a>
-            
+            <h1>Alle ordrer</h1>
 
         <%try{ for(var i=orders.length; i > 0; i--) {%>
             <div class="news-container">
                 <div class="headline-wrap">
                     <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
                 </div>
+                    <p>Ordre ID: <%= orders[i-1]._id %></p>
                     <p>Detaljer: <%= orders[i-1].order.text %></p>
                     <p>Oprettet: <%= orders[i-1].order.date %></p>
-                    <p>Bestilt af: <%= orders[i-1].order.customerId %></p>
+                    <p>Bestilt af: <a href="/displayuser/<%= orders[i-1].order.customerId %>"><%= orders[i-1].order.customerId %></a></p>
+                    <p>Status: <%= orders[i-1].order.status %></p>
+                    <br>
+                    <a href="/deleteorder/<%= orders[i-1].order.customerId %>/<%= orders[i-1]._id %>">Slet denne ordre</a>
+                    <a href="/updateorder/<%= orders[i-1]._id %>/Accepteret">Accepter denne ordre</a>
+                    <a href="/updateorder/<%= orders[i-1]._id %>/Afvist">Afvis denne ordre</a>
             </div>
                     
         <% }} catch(err){} %>

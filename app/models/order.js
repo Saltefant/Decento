@@ -9,7 +9,9 @@ var orderSchema = mongoose.Schema({
         customerId   : String,
         ordertype    : String,
         text         : String,
-        date         : String
+        date         : String,
+        status       : String,
+        downloadLink : String
     }
     
 });

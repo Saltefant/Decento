@@ -1,0 +1,34 @@
+<!-- test.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Decento - Vis bruger</title>
+<% include shared/head.ejs %>
+</head>
+
+<!-- HEADER -->
+<% include shared/header.ejs %>
+
+<!-- NAVIGATION -->
+<% include shared/navigation.ejs %>
+
+<body>
+    <div class="whiteout">
+        <div class="content-wrap">
+            <h1>Bruger</h1>
+            <div class="news-container">
+                <div class="headline-wrap">
+                    <h3>Brugernavn: <%= founduser.local.username %></h3>
+                </div>
+                <p>Id: <%= founduser._id %></p>
+                <p>Role: <%= founduser.local.role %></p>
+                <p>Password: <%= founduser.local.password %></p>
+            </div>
+            <a href="javascript:history.back()">< Gå tilbage</a>
+        </div>
+    </div>
+
+<!-- FOOTER -->
+<%- include shared/footer.ejs %>
+</body>
+</html>
