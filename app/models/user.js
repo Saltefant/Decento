@@ -8,10 +8,14 @@ var userSchema = mongoose.Schema({
 
     local            : {
         username     : String,
+        displayName  : String,
         password     : String,
-        role         : String
+        role         : String,
+        userinformation : {
+            firstName: String,
+            lastName: String
+        }
     }
-    
 });
 
 // methods ======================

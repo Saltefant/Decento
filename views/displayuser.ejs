@@ -19,9 +19,13 @@
                 <div class="headline-wrap">
                     <h3>Brugernavn: <%= founduser.local.username %></h3>
                 </div>
-                <p>Id: <%= founduser._id %></p>
-                <p>Role: <%= founduser.local.role %></p>
-                <p>Password: <%= founduser.local.password %></p>
+                <p>
+                Id: <%= founduser._id %><br>
+                Role: <%= founduser.local.role %><br>
+                Password: <%= founduser.local.password %><br>
+                <br>
+                Fornavn: <%= founduser.local.userinformation.firstName %><br>
+                Fornavn: <%= founduser.local.userinformation.lastName %><br>
             </div>
             <a href="javascript:history.back()">< Gå tilbage</a>
         </div>

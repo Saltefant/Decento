@@ -26,19 +26,27 @@
     <div class="content-wrap">
 
         <h1>Profil</h1>
-        <a href="/logout">Logout</a>
-            <p>
-                <strong>id</strong>: <%= user._id %><br>
-                <strong>username</strong>: <%= user.local.username %><br>
-                <strong>role</strong>: <%= user.local.role %><br>
-                <strong>password</strong>: <%= user.local.password %>
-            </p>
-        
-            <%try{if (message.length > 0) { %>
-                <div class="alert"><%= message %></div>
-            <% }} catch(err) {} %>
 
-      
+        <%if (message.length > 0) { %>
+            <div class="alert"><%= message %></div><br>
+        <% } %>
+
+        <a href="/logout">Log ud</a>
+            <p>
+                <strong>id:</strong>: <%= user._id %><br>
+                <strong>username:</strong>: <%= user.local.username %><br>
+                <strong>role:</strong>: <%= user.local.role %><br>
+                <strong>password:</strong>: <%= user.local.password %>
+                <br>
+                <%  if (!user.local.userinformation.firstName)
+                user.local.userinformation.firstName = '(ikke udfyldt)'
+                    if (!user.local.userinformation.lastName)
+                user.local.userinformation.lastName = '(ikke udfyldt)' %>
+                <strong>Fornavn:</strong> <%= user.local.userinformation.firstName %><br>
+                <strong>Efternavn:</strong> <%= user.local.userinformation.lastName %>
+            </p>
+    
+            <a href="/brugerinfo">Opdater brugeroplysninger</a>  <br>
 
         
     
@@ -67,7 +75,7 @@
         <h1>Opret ordre</h1>
 
         <form action="/placeorder" method="POST" id="orderForm">
-            <input type="hidden" placeholder="Overskrift" name="userId" value="<%= user._id %>">
+            <input type="hidden" name="userId" value="<%= user._id %>">
             <label>Type:</label>
             <br><br>
             <select name="type" style="width:100%;padding: 13px 13px 13px 13px;" required>

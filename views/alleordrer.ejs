@@ -16,8 +16,13 @@
     <div class="content-wrap">
 
             <h1>Alle ordrer</h1>
+            <%if (message.length > 0) { %>
+                <div class="alert"><%= message %></div><br>
+            <% } %>
+            <p>Samtlige ordrer er listet herunder: (<%= orders.length %> ordrer i alt)</p>
+            
 
-        <%try{ for(var i=orders.length; i > 0; i--) {%>
+        <% for(var i=orders.length; i > 0; i--) {%>
             <div class="news-container">
                 <div class="headline-wrap">
                     <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
@@ -32,8 +37,7 @@
                     <a href="/updateorder/<%= orders[i-1]._id %>/Accepteret">Accepter denne ordre</a>
                     <a href="/updateorder/<%= orders[i-1]._id %>/Afvist">Afvis denne ordre</a>
             </div>
-                    
-        <% }} catch(err){} %>
+        <% } %>
 
     </div>
 </div>

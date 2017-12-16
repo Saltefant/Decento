@@ -16,6 +16,11 @@
         <div class="content-wrap">
             
             <h1>Nyheder</h1>
+            
+            <%if (message.length > 0) { %>
+                <div class="alert"><%= message %></div><br><br>
+            <% } %>
+
                 <% for(var i=posts.length; i > 0; i--) {%>
                         <div class="news-container">
                             <div class="headline-wrap">

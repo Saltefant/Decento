@@ -15,12 +15,14 @@
 <div class="whiteout">
     <div class="content-wrap">
 
-
         <%try { if (user.local.role){ %>
 
             <h3>You are already logged in as "<%= user.local.username %>"</h3>
+            <%if (message.length > 0) { %>
+                <div class="alert"><%= message %></div><br>
+            <% } %>
             
-            <a href="/logout">Logout</a>
+            <a href="/logout">Log ud</a>
 
         <%}} catch(err) { %> 
             <h1>Login</h1>
@@ -29,11 +31,11 @@
                 <% if (message.length > 0) { %>
                     <div class="alert"><%= message %></div>
                 <% } %>
-            
+             
                 <!-- LOGIN FORM -->
                 <form action="/login" method="post">
                         
-                    <label>Username</label>
+                    <label>Brugernavn</label>
                     <input type="text" class="form-control" name="username" maxlength="6" required>
             
                     <label>Password</label>

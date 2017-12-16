@@ -5,8 +5,6 @@ var User = require('../app/models/user');
 //To uplaod image
 var fs = require('fs');
 var multer  = require('multer');
-var upload = multer({ dest: 'upload/'});
-var type = upload.single('recfile');
 
 
 // app/routes.js
@@ -22,11 +20,29 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.get('/brugerinfo', isLoggedIn, function(req, res) { 
+        res.render('brugerinfo.ejs', {
+            user : req.user
+        }); // load the index.ejs file
+    });
+
+    app.post('/updateuser', isLoggedIn, function (req, res) {
+        User.findOneAndUpdate({'_id' : req.user._id}, {'local.userinformation.firstName' : req.body.firstName,'local.userinformation.lastName' : req.body.lastName }, {upsert:true}, (err, res2) => {
+            if (err) {
+                req.flash('profileMessage', 'Der skete en fejl.');
+                res.redirect('/profile');
+            } else {
+                req.flash('profileMessage', 'Dine oplysninger blev opdateret');
+                res.redirect('/profile'); 
+            }
+        });
+    });
+
     // =====================================
     // CREATE AN ORDER =====================
     // =====================================
 
-    app.post('/placeorder', type, function (req, res) {
+    app.post('/placeorder', isLoggedIn, function (req, res) {
         try {
         newOrder = new Order();
         d = new Date();
@@ -46,19 +62,22 @@ module.exports = function(app, passport) {
         
         newOrder.save();
         
-        res.redirect('/profile/Din ordre blev oprettet!/'); 
+        req.flash('profileMessage', 'Din ordre blev oprettet');
+        res.redirect('/profile'); 
         } catch(err) {
-        res.redirect('/profile/Der gik noget galt!/');     
+        req.flash('profileMessage', 'Der gik noget galt');
+        res.redirect('/profile');     
         }
     });
 
     // =====================================
     // CREATE A NEWS POST ==================
     // =====================================
+    var upload = multer({ dest: 'uploads/'}).single('recfile');
+    //var type = upload.single('recfile');
 
-    app.post('/postnews', type, function (req, res) {
+    app.post('/postnews', isLoggedIn, upload, function (req, res) {
         
-        try{
             if(req.user.local.role === "Admin") {
     
                 newPost = new Post();
@@ -93,16 +112,11 @@ module.exports = function(app, passport) {
             newPost.newspost.date = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
             
             newPost.save();
-
-            res.render('profile.ejs', {
-                user : req.user,
-                message : 'Nyheden blev oprettet!'
-            });
+            
+            req.flash('profileMessage', 'Nyheden blev oprettet');
+            res.redirect('/profile');
             } else {
             res.redirect('/login');
-        }} catch(err) {
-            console.log(err);
-            res.redirect('/login')
         }
     });
 
@@ -111,16 +125,18 @@ module.exports = function(app, passport) {
     // =====================================
 
     app.get('/nyheder', function(req, res) {
-        Post.find((err, result) => {  
+        Post.find((err, res2) => {  
             if (err) {
                 res.render('nyheder.ejs', {
-                    user : req.user
+                    user : req.user,
+                    message : req.flash('newsMessage')
             });
             } else {
                 res.render('nyheder.ejs', {
                     user : req.user,
-                    posts : result // get the user out of session and pass to template
-                }); // load the index.ejs file
+                    posts : res2,
+                    message : req.flash('newsMessage')
+                }); 
             }
         });
     });
@@ -230,47 +246,38 @@ module.exports = function(app, passport) {
     // UPDATE ORDER STATUS =================
     // =====================================
 
-    app.get('/updateorder/:id/:newstatus', function(req, res) {
+    app.get('/updateorder/:id/:newstatus', isLoggedIn, function(req, res) {
         
-        try{
-                    if(req.user.local.role === "Admin") {
-                        Order.findOneAndUpdate({'_id' : req.params.id}, {'order.status' : req.params.newstatus}, {upsert:true}, (err, result) => {
-                        Order.find((err, result) => {  
-                        if (err) {
-                            res.render('profile.ejs', {
-                                user : req.user, // get the user out of session and pass to template
-                                message : 'Der skete en fejl'
-                            });
-                        } else {
-                            res.render('alleordrer.ejs', {
-                                user : req.user,
-                                orders : result
-                            }); 
-                        }
-                        });
-                    });
-                    } else {
-                        res.redirect('/profile');
-            }} catch(err) {
-        res.render('login.ejs', {
-            user : req.user
-        }); 
-    }
+        if(req.user.local.role === "Admin") {
+            Order.findOneAndUpdate({'_id' : req.params.id}, {'order.status' : req.params.newstatus}, {upsert:true}, (err, result) => {
+            Order.find((err, result) => {  
+            if (err) {
+                req.flash('orderMessage', 'Der skete en fejl')
+                res.redirect('/alleordrer');
+            } else {
+                req.flash('orderMessage', 'Ordren blev opdateret')
+                res.redirect('/alleordrer'); 
+            }
+            });
+        });
+        } else {
+            res.redirect('/profile');
+        }; 
     });
 
     // =====================================
     // DISPLAY USER INFORMATION ============
     // =====================================
 
-    app.get('/displayuser/:id', function(req, res) {
-    try {
+    app.get('/displayuser/:id', isLoggedIn, function(req, res) {
         if(req.user.local.role === "Admin") {
             User.findById(req.params.id, (err, result) => {
                 res.render('displayuser.ejs', {
-            founduser : result}); 
+                    founduser : result}); 
             });
-        }} catch(err) { 
-            res.redirect('/login');
+        } else { 
+            req.flash('profileMessage','Du mangler rettigheder');
+            res.redirect('/profile')
         }
     });
 
@@ -278,35 +285,40 @@ module.exports = function(app, passport) {
     // DELETE A NEWSPOST ===================
     // =====================================
 
-    app.get('/deletepost/:id', function(req, res) {
-        try{
+    app.get('/deletepost/:id', isLoggedIn, function(req, res) {
         if(req.user.local.role === "Admin") {
             Post.findByIdAndRemove(req.params.id, (err, result) => {
-                res.redirect('/nyheder')
+                if (err) {
+                    req.flash('newsMessage','Der skete en fejl');
+                    res.redirect('/nyheder')
+                } else {
+                    req.flash('newsMessage','Nyheden blev slettet');
+                    res.redirect('/nyheder')
+                }
             });
         } else {
-            res.redirect('/login')
-        }} catch(err) {
-            console.log(err);
-            res.redirect('/login');
-        }        
+            req.flash('loginMessage','Du mangler rettigheder');
+            res.redirect('/profile')
+        }       
     });
 
     // =====================================
     // DELETE AN ORDER =====================
     // =====================================
 
-    app.get('/deleteorder/:orderUserId/:id', function(req, res) {
-        try{
+    app.get('/deleteorder/:orderUserId/:id', isLoggedIn, function(req, res) {
+
         if(req.user._id == req.params.orderUserId || req.user.local.role == 'Admin') {
             Order.findByIdAndRemove(req.params.id, (err, newresult) => {
-
             Order.find({ 'order.customerId': req.user._id }, (err, result) => {
-                res.render('profile.ejs', {
-                    user : req.user,
-                    message : "Ordren er slettet!",
-                    orders : result
-                }); 
+                
+                if(req.user.local.role == 'Admin') {
+                    req.flash('orderMessage', 'Ordren blev slettet');
+                    res.redirect('/alleordrer'); 
+                } else {
+                    req.flash('profileMessage', 'Ordren blev slettet');
+                    res.redirect('/profile')
+                }
             });
         });
         } else {
@@ -314,10 +326,7 @@ module.exports = function(app, passport) {
                 user : req.user,
                 message : "Noget gik galt... UserId: " + req.user._id + "orderUserId: " + req.params.orderUserId
             }); 
-        }} catch(err) {
-            console.log(err);
-            res.redirect('/login');
-        }        
+        }   
     });
 
     // =====================================
@@ -330,18 +339,19 @@ module.exports = function(app, passport) {
             if (err) {
                 res.render('profile.ejs', {
                     user : req.user, // get the user out of session and pass to template
-                    message : 'error'
+                    message : req.flash('profileMessage')
             });
             } else {
                 res.render('profile.ejs', {
                     user : req.user,
-                    orders : result // get the user out of session and pass to template
+                    orders : result,
+                    message : req.flash('profileMessage') // get the user out of session and pass to template
                 }); // load the index.ejs file
             }
         });
     });
 
-    app.get('/profile/:message', isLoggedIn, function(req, res) {
+    /*app.get('/profile/:message', isLoggedIn, function(req, res) {
         //{ 'order.customerId': '5a31adc04c3cbf0860116616' },
         Order.find({ 'order.customerId': req.user._id }, (err, result) => {  
             if (err) {
@@ -357,36 +367,31 @@ module.exports = function(app, passport) {
                 }); // load the index.ejs file
             }
         });
-    });
+    });*/
 
     // =====================================
     // SHOW ALL ORDERS =====================
     // =====================================
 
-    app.get('/alleordrer/', isLoggedIn, function(req, res) {
+    app.get('/alleordrer', isLoggedIn, function(req, res) {
         
-        try{
             if(req.user.local.role === "Admin") {
                 Order.find((err, result) => {  
                 if (err) {
-                    res.render('profile.ejs', {
-                        user : req.user, // get the user out of session and pass to template
-                        message : 'error'
-                    });
+                    req.flash('profileMessage', 'Der skete en fejl');
+                    res.redirect('/profile');
                 } else {
                     res.render('alleordrer.ejs', {
                         user : req.user,
-                        orders : result
+                        orders : result,
+                        message : req.flash('orderMessage')
                     }); 
                 }
                 });
             } else {
+                req.flash('profileMessage', 'Du mangler rettigheder')
                 res.redirect('/profile');
-            }} catch(err) {
-        res.render('login.ejs', {
-            user : req.user
-        }); 
-    }
+            }; 
     });
 
     // =====================================
@@ -401,12 +406,12 @@ module.exports = function(app, passport) {
     
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated())
         return next();
 
     // if they aren't redirect them to the home page
+    req.flash('loginMessage', 'Du er ikke logget ind')
     res.redirect('/login');
 };
 

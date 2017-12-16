@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decento - Profil</title>
+<% include shared/head.ejs %>
+</head>
+
+<!-- HEADER -->
+<% include shared/header.ejs %>
+
+<!-- NAVIGATION -->
+<% include shared/navigation.ejs %>
+
+<!--
+<html>
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head> !-->
+<body>
+<div class="whiteout">
+    <div class="content-wrap">
+
+        <h1>Profil</h1>
+        <a href="/logout">Log ud</a>
+            <p>
+                <strong>id</strong>: <%= user._id %><br>
+                <strong>username</strong>: <%= user.local.username %><br>
+            </p>
+        
+            <%try{if (message.length > 0) { %>
+                <div class="alert"><%= message %></div>
+            <% }} catch(err) {} %>
+            
+    <!-- HVIS BRUGER -->
+        <h1>Opdater brugeroplysninger</h1>
+
+        <%  if (!user.local.userinformation.firstName)
+        user.local.userinformation.firstName = '(ikke udfyldt)'
+            if (!user.local.userinformation.lastName)
+        user.local.userinformation.lastName = '(ikke udfyldt)' %>
+
+        <form action="/updateuser" method="POST" id="infoForm">
+            <label>Fornavn:</label>
+            <input type="text" name="firstName" value="<%=user.local.userinformation.firstName%>">
+            <br><br>
+            <label>Efternavn:</label>
+            <input type="text" name="lastName" value="<%=user.local.userinformation.lastName%>">
+            <button type="submit">Opdater</button>
+        </form>
+    </div>
+</div>
+<!-- FOOTER -->
+<%- include shared/footer.ejs %>
+</body>
+</html>
