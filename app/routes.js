@@ -14,12 +14,12 @@ module.exports = function(app, passport) {
 // FORCE HTTPS =========================
 // =====================================
 
-/* app.get('*',function(req,res,next){
+app.get('*',function(req,res,next){
     if(req.headers['x-forwarded-proto']!='https')
       res.redirect('https://decento.herokuapp.com'+req.url);
     else
       next(); // Continue to other routes if we're not redirecting
-}); */
+});
 
 // =====================================
 // SHOW HOME PAGE ======================
