@@ -42,7 +42,11 @@
         <%  if (!user.userinformation.firstName)
         user.userinformation.firstName = '(ikke udfyldt)'
             if (!user.userinformation.lastName)
-        user.userinformation.lastName = '(ikke udfyldt)' %>
+        user.userinformation.lastName = '(ikke udfyldt)' 
+        if (!user.userinformation.phone)
+            user.userinformation.phone = '(ikke udfyldt)'
+        if (!user.userinformation.email)
+            user.userinformation.email = '(ikke udfyldt)'%>
 
         <form action="/updateuser" method="POST" id="infoForm">
             <label>Fornavn:</label>

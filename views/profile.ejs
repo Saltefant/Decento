@@ -41,7 +41,11 @@
                 <%  if (!user.userinformation.firstName)
                 user.userinformation.firstName = '(ikke udfyldt)'
                     if (!user.userinformation.lastName)
-                user.userinformation.lastName = '(ikke udfyldt)' %>
+                user.userinformation.lastName = '(ikke udfyldt)' 
+                if (!user.userinformation.phone)
+                    user.userinformation.phone = '(ikke udfyldt)'
+                if (!user.userinformation.email)
+                    user.userinformation.email = '(ikke udfyldt)'%>
                 <strong>Fornavn:</strong> <%= user.userinformation.firstName %><br>
                 <strong>Efternavn:</strong> <%= user.userinformation.lastName %><br>
                 <strong>Telefon nr.:</strong> <a href="<%= user.userinformation.phone %>" title="Ring op!"><%= user.userinformation.phone %></a><br>
