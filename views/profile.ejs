@@ -33,10 +33,10 @@
 
         <a href="/logout">Log ud</a>
             <p>
-                <strong>id:</strong>: <%= user._id %><br>
-                <strong>username:</strong>: <%= user.local.username %><br>
-                <strong>role:</strong>: <%= user.local.role %><br>
-                <strong>password:</strong>: <%= user.local.password %><br>
+                <strong>id:</strong> <%= user._id %><br>
+                <strong>username:</strong> <%= user.local.username %><br>
+                <strong>role:</strong> <%= user.local.role %><br>
+                <strong>password:</strong> <%= user.local.password %><br>
                 <br>
                 <%  if (!user.userinformation.firstName)
                 user.userinformation.firstName = '(ikke udfyldt)'
@@ -99,7 +99,7 @@
         <%try{ for(var i=orders.length; i > 0; i--) {%>
             
                         <div class="news-container">
-                            <div class="headline-wrap">
+                            <div class="headline-wrap <%= orders[i-1].order.ordertype %>">
                                 <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
                             </div>
                                 <p>Ordre ID: <%= orders[i-1]._id %></p>
