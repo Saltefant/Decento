@@ -24,7 +24,7 @@
 
         <% for(var i=orders.length; i > 0; i--) {%>
             <div class="news-container">
-                <div class="headline-wrap">
+                <div class="headline-wrap <%=orders[i-1].order.ordertype%>">
                     <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
                 </div>
                     <p>Ordre ID: <%= orders[i-1]._id %></p>

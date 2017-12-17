@@ -648,8 +648,19 @@ span {
     color: rgb(255, 255, 255);
     padding: 20px 0px 35px 0px;
     width: 100%;
-    background: rgb(140, 0, 0);
     margin-bottom: 20px;
+}
+
+.headline-wrap.Andet {
+    background: rgb(0, 0, 140);
+}
+
+.headline-wrap.Produktfoto {
+    background: rgb(0, 140, 0);
+}
+
+.headline-wrap.Ejendomsfoto {
+    background: rgb(140, 0, 0);
 }
 
 .headline-wrap h3 {
