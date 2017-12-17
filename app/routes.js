@@ -275,7 +275,7 @@ app.get('/customeraccept/:customerid/:orderid/:status', isLoggedIn, function(req
                     req.flash('profileMessage', "Noget gik galt... " + err);
                     res.redirect('/profile')
                 }
-            Order.find((err, result) => {  
+            Order.find({}).sort({'order.dateCreated':'desc'}).exec(function(err, result) {  
                 if (err) {
                     req.flash('profileessage', 'Noget gik galt... ' + err)
                     res.redirect('/profile');
@@ -310,7 +310,7 @@ app.post('/updateorder/:orderid', isLoggedIn, function(req, res) { //___________
                     req.flash('profileMessage', "Noget gik galt... " + err);
                     res.redirect('/profile')
                 }
-            Order.find((err, result) => {  
+            Order.find({}).sort({'order.dateCreated':'desc'}).exec(function(err, result){  
                 if (err) {
                     req.flash('profileMessage', 'Noget gik galt... ' + err)
                     res.redirect('/profile');
@@ -384,7 +384,7 @@ app.get('/deleteorder/:orderUserId/:id', isLoggedIn, function(req, res) {
                     res.redirect('/profile'); 
                 }
 
-            Order.find({ 'order.customerId': req.user._id }, (err, result) => {
+            Order.find({ 'order.customerId': req.user._id }).sort({'order.dateCreated':'desc'}).exec(function(err, result){
                 if(err) {
                     req.flash('profileMessage', 'Noget gik galt... ' + err);
                     res.redirect('/profile'); 
