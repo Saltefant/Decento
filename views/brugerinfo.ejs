@@ -39,17 +39,24 @@
     <!-- HVIS BRUGER -->
         <h1>Opdater brugeroplysninger</h1>
 
-        <%  if (!user.local.userinformation.firstName)
-        user.local.userinformation.firstName = '(ikke udfyldt)'
-            if (!user.local.userinformation.lastName)
-        user.local.userinformation.lastName = '(ikke udfyldt)' %>
+        <%  if (!user.userinformation.firstName)
+        user.userinformation.firstName = '(ikke udfyldt)'
+            if (!user.userinformation.lastName)
+        user.userinformation.lastName = '(ikke udfyldt)' %>
 
         <form action="/updateuser" method="POST" id="infoForm">
             <label>Fornavn:</label>
-            <input type="text" name="firstName" value="<%=user.local.userinformation.firstName%>">
-            <br><br>
+            <input type="text" name="firstName" value="<%=user.userinformation.firstName%>">
+
             <label>Efternavn:</label>
-            <input type="text" name="lastName" value="<%=user.local.userinformation.lastName%>">
+            <input type="text" name="lastName" value="<%=user.userinformation.lastName%>">
+
+            <label>Telefon nr.:</label>
+            <input type="text" name="phone" value="<%=user.userinformation.phone%>">
+
+            <label>Email:</label>
+            <input type="text" name="email" value="<%=user.userinformation.email%>">
+
             <button type="submit">Opdater</button>
         </form>
     </div>

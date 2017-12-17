@@ -36,14 +36,16 @@
                 <strong>id:</strong>: <%= user._id %><br>
                 <strong>username:</strong>: <%= user.local.username %><br>
                 <strong>role:</strong>: <%= user.local.role %><br>
-                <strong>password:</strong>: <%= user.local.password %>
+                <strong>password:</strong>: <%= user.local.password %><br>
                 <br>
-                <%  if (!user.local.userinformation.firstName)
-                user.local.userinformation.firstName = '(ikke udfyldt)'
-                    if (!user.local.userinformation.lastName)
-                user.local.userinformation.lastName = '(ikke udfyldt)' %>
-                <strong>Fornavn:</strong> <%= user.local.userinformation.firstName %><br>
-                <strong>Efternavn:</strong> <%= user.local.userinformation.lastName %>
+                <%  if (!user.userinformation.firstName)
+                user.userinformation.firstName = '(ikke udfyldt)'
+                    if (!user.userinformation.lastName)
+                user.userinformation.lastName = '(ikke udfyldt)' %>
+                <strong>Fornavn:</strong> <%= user.userinformation.firstName %><br>
+                <strong>Efternavn:</strong> <%= user.userinformation.lastName %><br>
+                <strong>Telefon nr.:</strong> <a href="<%= user.userinformation.phone %>" title="Ring op!"><%= user.userinformation.phone %></a><br>
+                <strong>Email:</strong> <%= user.userinformation.email %>
             </p>
     
             <a href="/brugerinfo">Opdater brugeroplysninger</a>  <br>

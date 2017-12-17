@@ -27,7 +27,7 @@ app.get('/brugerinfo', isLoggedIn, function(req, res) {
 });
 
 app.post('/updateuser', isLoggedIn, function (req, res) {
-    User.findOneAndUpdate({'_id' : req.user._id}, {'local.userinformation.firstName' : req.body.firstName,'local.userinformation.lastName' : req.body.lastName }, {upsert:true}, (err, res2) => {
+    User.findOneAndUpdate({'_id' : req.user._id}, {'userinformation.firstName' : req.body.firstName,'userinformation.lastName' : req.body.lastName,'userinformation.phone' : req.body.phone,'userinformation.email' : req.body.email }, {upsert:true}, (err, res2) => {
         if (err) {
             req.flash('profileMessage', 'Noget gik galt...' + err);
             res.redirect('/profile');

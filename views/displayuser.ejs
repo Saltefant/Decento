@@ -24,8 +24,10 @@
                 Role: <%= founduser.local.role %><br>
                 Password: <%= founduser.local.password %><br>
                 <br>
-                Fornavn: <%= founduser.local.userinformation.firstName %><br>
-                Fornavn: <%= founduser.local.userinformation.lastName %><br>
+                Fornavn: <%= founduser.userinformation.firstName %><br>
+                Efternavn: <%= founduser.userinformation.lastName %><br>
+                Telefon nr.: <a href="tel:<%= founduser.userinformation.phone %>"><%= founduser.userinformation.phone %></a><br>
+                Efternavn nr: <%= founduser.userinformation.email %><br>
             </div>
             <a href="javascript:history.back()">< Gå tilbage</a>
         </div>

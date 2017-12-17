@@ -10,11 +10,13 @@ var userSchema = mongoose.Schema({
         username     : String,
         displayName  : String,
         password     : String,
-        role         : String,
-        userinformation : {
-            firstName: String,
-            lastName: String
-        }
+        role         : String
+        },
+    userinformation  : {
+        firstName    : String,
+        lastName     : String,
+        phone        : String,
+        email        : String
     }
 });
 
