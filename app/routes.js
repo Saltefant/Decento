@@ -457,6 +457,31 @@ app.get('/alleordrer', isLoggedIn, function(req, res) {
 // SHOW ALL WAITING ORDERS =============
 // =====================================
 
+app.get('/alleaaccepteredeordrer', isLoggedIn, function(req, res) {
+    
+        if(req.user.local.role === "Admin") {
+            Order.find({ 'customerResponse.accepted': 'Accepteret' }).sort({'order.dateCreated':'desc'}).exec(function(err, result) {  
+            if (err) {
+                req.flash('profileMessage', 'Noget gik galt... ' + err);
+                res.redirect('/profile');
+            } else {
+                res.render('alleaaccepteredeordrer.ejs', {
+                    user : req.user,
+                    orders : result,
+                    message : req.flash('orderMessage')
+                }); 
+            }
+            });
+        } else {
+            req.flash('profileMessage', 'Du mangler rettigheder')
+            res.redirect('/profile');
+        }; 
+});
+
+// =====================================
+// SHOW ALL WAITING ORDERS =============
+// =====================================
+
 app.get('/alleafventendeordrer', isLoggedIn, function(req, res) {
     
         if(req.user.local.role === "Admin") {

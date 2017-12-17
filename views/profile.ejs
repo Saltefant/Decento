@@ -92,13 +92,12 @@
             <% } %>
 
         <a href="/brugerinfo">Opdater brugeroplysninger</a>  <br>
-
-        
     
     <!-- HVIS ADMIN -->
     <% if (user.local.role === 'Admin'){ %>
-        <br><a href="/alleordrer">Se alle ordrer</a><br>
-        <a href="/alleafventendeordrer">Se alle afventende ordrer</a>
+        <br><a href="/alleordrer">Se <b>alle</b> ordrer</a><br>
+        <a href="/alleafventendeordrer">Se alle <b>afventende</b> ordrer</a><br>
+        <a href="/alleaaccepteredeordrer">Se alle <b>accepterede</b> ordrer</a>
 
         <h1>Opret nyhed</h1>
 
