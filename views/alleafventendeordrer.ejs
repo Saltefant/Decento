@@ -23,7 +23,7 @@
             <p>Samtlige afventende ordrer er listet herunder: (<%= orders.length %> ordrer venter på svar i alt)</p>
 
         <% for(var i=orders.length; i > 0; i--) {%>
-            <div class="news-container">
+            <div class="news-container <%= orders[i-1].customerResponse.accepted %>">
                 <div class="headline-wrap <%=orders[i-1].order.ordertype%>">
                     <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
                 </div>
@@ -35,7 +35,7 @@
                     <strong>Detaljer:</strong> <%= orders[i-1].order.details %><br>
                     <strong>Status:</strong> <%= orders[i-1].response.status %><br>
                     <strong>Sat dato:</strong> <%= orders[i-1].response.actualDate %><br><br>
-                    <strong><u>Kommentarer fra DECENTO:</strong> <%= orders[i-1].response.comments %></u><br>
+                    <strong>Kommentarer fra DECENTO:</strong> <%= orders[i-1].response.comments %><br>
                     <strong>Pris:</strong> <u><%= orders[i-1].response.price %></u><br>
                     <strong>Kundens accept:</strong> <%= orders[i-1].customerResponse.accepted %><br>
                     <strong>Download link:</strong> <a href="<%= orders[i-1].response.downloadLink %>"><%= orders[i-1].response.downloadLink %></a><br>

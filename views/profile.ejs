@@ -25,7 +25,7 @@
 <div class="whiteout">
     <div class="content-wrap">
 
-        <h1>Profil</h1>
+        <h1><%= user.local.username %> (<%= user.local.role %>)</h1>
 
         <%if (message.length > 0) { %>
             <div class="alert"><%= message %></div><br>
@@ -34,8 +34,6 @@
         <a href="/logout">Log ud</a>
             <p>
             <strong>id:</strong> <%= user._id %><br>
-            <strong>username:</strong> <%= user.local.username %><br>
-            <strong>role:</strong> <%= user.local.role %><br>
             <strong>password:</strong> <%= user.local.password %><br>
             </p>
 
@@ -125,8 +123,9 @@
         <form action="/placeorder" method="POST" id="orderForm">
 
             <input type="hidden" name="userId" value="<%= user._id %>">
-            <label>Type:</label>
-            <br><br>
+
+            <h3>Type:</h3>
+
             <select name="ordertype" style="width:100%;padding: 10px 10px 10px 10px;" required>
                 <option value="Ejendomsfoto">Ejendomsfoto</option>
                 <option value="Produktfoto">Produktfoto</option>
@@ -156,8 +155,8 @@
         <br><br>
         <h1>Dine ordrer:</h1>
         <%try{ for(var i=orders.length; i > 0; i--) {%>
-            
-                        <div class="news-container">
+
+                        <div class="news-container <%=orders[i-1].response.status%>">
                             <div class="headline-wrap <%= orders[i-1].order.ordertype %>">
                                 <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
                             </div>

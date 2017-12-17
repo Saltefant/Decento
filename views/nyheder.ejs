@@ -35,7 +35,7 @@
                             </div>
                             <% try { if (user.local.role === 'Admin'){ %>
                             <br>
-                            <a href="/deletepost/<%= posts[i-1]._id %>">Delete</a>
+                            <p><a href="/deletepost/<%= posts[i-1]._id %>">Delete</a></p>
                             <%}}catch(err){}%>
                         </div>
                 <% } %>

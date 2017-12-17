@@ -655,6 +655,19 @@ span {
     margin: 0px;
 }
 
+.news-container.Venter.på.bekræftelse {
+    -webkit-box-shadow: 0px 0px 30px rgba(255, 230, 0);   /* for Chrome (X-pos, Y-pos, blur)*/ 
+    box-shadow: 0px 0px 30px rgb(255, 230, 0);
+}
+.news-container.Afvist {
+    -webkit-box-shadow: 0px 0px 30px rgba(190, 0, 0);   /* for Chrome (X-pos, Y-pos, blur)*/ 
+    box-shadow: 0px 0px 30px rgb(190, 0, 0);
+}
+.news-container.Accepteret {
+    -webkit-box-shadow: 0px 0px 30px rgb(0, 190, 0);   /* for Chrome (X-pos, Y-pos, blur)*/ 
+    box-shadow: 0px 0px 30px rgb(0, 190, 0);
+}
+
 .content-wrap a {
     color: rgb(190, 0, 0);
     font-weight: 500;

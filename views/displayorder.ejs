@@ -75,7 +75,7 @@
                             <input type="text" name="downloadLink" value="<%=orders[i-1].response.downloadLink%>"><%=orders[i-1].response.downloadLink%>
                         <br>
                         
-                        <a href="#" onclick="document.getElementById('orderForm').submit()">Opdater ordre</a>
+                        <a href="#" onclick="document.getElementById('orderForm').submit()">Opdater ordre</a><br>
                         <a href="/deleteorder/<%= orders[i-1].order.customerId %>/<%= orders[i-1]._id %>">Slet denne ordre</a>
                     </p>
                     </form>

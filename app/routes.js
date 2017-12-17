@@ -304,16 +304,16 @@ app.post('/updateorder/:orderid', isLoggedIn, function(req, res) { //___________
                 'response.downloadLink' : req.body.downloadLink
             }, {upsert:true}, (err, result) => {
                 if(err) {
-                    req.flash('orderMessage', "Noget gik galt... " + err);
-                    res.redirect('/alleordrer')
+                    req.flash('profileMessage', "Noget gik galt... " + err);
+                    res.redirect('/profile')
                 }
             Order.find((err, result) => {  
                 if (err) {
-                    req.flash('orderMessage', 'Noget gik galt... ' + err)
-                    res.redirect('/alleordrer');
+                    req.flash('profileMessage', 'Noget gik galt... ' + err)
+                    res.redirect('/profile');
                 } else {
-                    req.flash('orderMessage', 'Ordren blev opdateret')
-                    res.redirect('/alleordrer'); 
+                    req.flash('profileMessage', 'Ordren blev opdateret')
+                    res.redirect('/profile'); 
                 }
             });
         });

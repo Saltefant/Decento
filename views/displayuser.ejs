@@ -14,18 +14,13 @@
 <body>
     <div class="whiteout">
         <div class="content-wrap">
-            <h1>Bruger</h1>
-            <a href="javascript:history.back()">< Gå tilbage</a><br><br>
-            <div class="news-container">
-                <div class="headline-wrap">
-                    <h3>Brugernavn: <%= founduser.local.username %></h3>
-                </div>
+            <h1><%= founduser.local.username %> (<%= founduser.local.role %>)</h1>
+            <a href="javascript:history.back()">< Gå tilbage</a><br>
+
                 <p>
                 <strong>Id:</strong> <%= founduser._id %><br>
-                <strong>Role:</strong> <%= founduser.local.role %><br>
                 <strong>Password:</strong> <%= founduser.local.password %><br>
                 </p>
-                <br>
                 
                 <% if (founduser.local.role == 'Firma') { %>
                     <h3>Kontaktperson:</h3>
@@ -43,7 +38,6 @@
 
                 <% if (founduser.local.role == 'Firma') { %>
 
-                <br>
                 <h3>Firmaoplysninger:</h3>
 
                 <p>    
@@ -57,7 +51,6 @@
                     
                 <% } %>
 
-            </div>
             <a href="javascript:history.back()">< Gå tilbage</a>
         </div>
     </div>
