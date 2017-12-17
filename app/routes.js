@@ -88,7 +88,7 @@ app.post('/placeorder', isLoggedIn, function (req, res) {
         }
         return i;}
 
-    newOrder.order.dateCreated = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
+    newOrder.order.dateCreated = `${addZero(d.getDate())}-${addZero(d.getMonth()+1)}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
     
     if(newOrder.save()) {
         req.flash('profileMessage', 'Din ordre blev oprettet');
@@ -102,6 +102,7 @@ app.post('/placeorder', isLoggedIn, function (req, res) {
 // =====================================
 // CREATE A NEWS POST ==================
 // =====================================
+
 var upload = multer({ dest: 'uploads/'}).single('recfile');
 //var type = upload.single('recfile');
 
@@ -158,7 +159,7 @@ app.post('/postnews', isLoggedIn, upload, function (req, res) {
 // =====================================
 
 app.get('/nyheder', function(req, res) {
-    Post.find((err, res2) => {  
+    Post.find({}).sort({'newspost.date': 'desc'}).exec(function(err, res2) {  
         if (err) {
             req.flash('newsMessage', 'Noget gik galt...' + err)
             res.render('nyheder.ejs', {
@@ -259,6 +260,7 @@ app.get('/portraetfoto', function(req, res) {
         user : req.user 
     });
 });
+
 // =====================================
 // UPDATE ORDER STATUS =================
 // =====================================
@@ -409,7 +411,7 @@ app.get('/deleteorder/:orderUserId/:id', isLoggedIn, function(req, res) {
 // =====================================
 
 app.get('/profile', isLoggedIn, function(req, res) {
-    Order.find({ 'order.customerId': req.user._id }, (err, result) => {  
+    Order.find({ 'order.customerId': req.user._id }).sort({'order.dateCreated':'desc'}).exec(function(err, result) {  
         if (err) {
             req.flash('profileMessage', 'Noget gik galt... ' + err)
             res.render('profile.ejs', {
@@ -433,7 +435,7 @@ app.get('/profile', isLoggedIn, function(req, res) {
 app.get('/alleordrer', isLoggedIn, function(req, res) {
     
         if(req.user.local.role === "Admin") {
-            Order.find((err, result) => {  
+            Order.find({}).sort({'order.dateCreated':'desc'}).exec(function(err, result) {  
             if (err) {
                 req.flash('profileMessage', 'Noget gik galt... ' + err);
                 res.redirect('/profile');
@@ -458,7 +460,7 @@ app.get('/alleordrer', isLoggedIn, function(req, res) {
 app.get('/alleafventendeordrer', isLoggedIn, function(req, res) {
     
         if(req.user.local.role === "Admin") {
-            Order.find({ 'response.status': 'Venter på bekræftelse' },(err, result) => {  
+            Order.find({ 'response.status': 'Venter på bekræftelse' }).sort({'order.dateCreated':'desc'}).exec(function(err, result) {  
             if (err) {
                 req.flash('profileMessage', 'Noget gik galt... ' + err);
                 res.redirect('/profile');

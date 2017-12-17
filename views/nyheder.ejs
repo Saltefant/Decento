@@ -21,21 +21,21 @@
                 <div class="alert"><%= message %></div><br><br>
             <% } %>
 
-                <% for(var i=posts.length; i > 0; i--) {%>
+                <% for(var i=0; i < posts.length; i++) {%>
                         <div class="news-container">
                             <div class="headline-wrap">
-                                <h3><%= posts[i-1].newspost.headline %></h3>
-                                <p>Oprettet: <%= posts[i-1].newspost.date %></p>
+                                <h3><%= posts[i].newspost.headline %></h3>
+                                <p>Oprettet: <%= posts[i].newspost.date %></p>
                             </div>
                             <div class="pre-line">
-                                <%if(posts[i-1].newspost.imagePath.length > 0) {%>
-                                    <img src="<%= posts[i-1].newspost.imagePath %>">
+                                <%if(posts[i].newspost.imagePath.length > 0) {%>
+                                    <img src="<%= posts[i].newspost.imagePath %>">
                                 <%}%>
-                                <p><%= posts[i-1].newspost.text %></p>
+                                <p><%= posts[i].newspost.text %></p>
                             </div>
                             <% try { if (user.local.role === 'Admin'){ %>
                             <br>
-                            <p><a href="/deletepost/<%= posts[i-1]._id %>">Delete</a></p>
+                            <p><a href="/deletepost/<%= posts[i]._id %>">Delete</a></p>
                             <%}}catch(err){}%>
                         </div>
                 <% } %>

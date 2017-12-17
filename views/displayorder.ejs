@@ -21,37 +21,37 @@
                 <div class="alert"><%= message %></div><br>
             <% } %>
 
-        <% for(var i=orders.length; i > 0; i--) {%>
+        <% for(var i=0; i < orders.length; i++) {%>
             <div class="news-container">
-                <div class="headline-wrap <%=orders[i-1].order.ordertype%>">
-                    <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
+                <div class="headline-wrap <%=orders[i].order.ordertype%>">
+                    <h3>Ordretype: <%= orders[i].order.ordertype %></h3>
                 </div>
                 <p>
-                    <strong>Ordre ID:</strong> <%= orders[i-1]._id %><br>
-                    <strong>Oprettet:</strong> <%= orders[i-1].order.dateCreated %><br>
-                    <strong>Bestilt af:</strong> <a href="/displayuser/<%= orders[i-1].order.customerId %>"><%= orders[i-1].order.customerId %></a><br>
-                    <strong>Ønsket dato:</strong> <%= orders[i-1].order.wantedDate %><br>
-                    <strong>Detaljer:</strong> <%= orders[i-1].order.details %><br>
+                    <strong>Ordre ID:</strong> <%= orders[i]._id %><br>
+                    <strong>Oprettet:</strong> <%= orders[i].order.dateCreated %><br>
+                    <strong>Bestilt af:</strong> <a href="/displayuser/<%= orders[i].order.customerId %>"><%= orders[i].order.customerId %></a><br>
+                    <strong>Ønsket dato:</strong> <%= orders[i].order.wantedDate %><br>
+                    <strong>Detaljer:</strong> <%= orders[i].order.details %><br>
                     <br>
-                    <form action="/updateorder/<%= orders[i-1]._id %>" method="POST" id="orderForm">
+                    <form action="/updateorder/<%= orders[i]._id %>" method="POST" id="orderForm">
                     <p>   
                         <strong>Status:</strong>
                             <select name="status" style="width:100%;padding: 10px 10px 10px 10px;"required>
 
-                                <% if(orders[i-1].response.status == 'Venter på bekræftelse') {%>
+                                <% if(orders[i].response.status == 'Venter på bekræftelse') {%>
                                     <option selected value="Venter på bekræftelse">Venter på bekræftelse</option>
                                 <% } else { %>
                                     <option value="Venter på bekræftelse">Venter på bekræftelse</option>
                                 <% } %>
                                 
 
-                                <% if(orders[i-1].response.status == 'Accepteret') {%>
+                                <% if(orders[i].response.status == 'Accepteret') {%>
                                 <option selected value="Accepteret">Accepteret</option>
                                 <% } else { %>
                                 <option value="Accepteret">Accepteret</option>
                                 <% } %>
 
-                                <% if(orders[i-1].response.status == 'Afvist') {%>
+                                <% if(orders[i].response.status == 'Afvist') {%>
                                     <option selected value="Afvist">Afvist</option>
                                 <% } else { %>
                                     <option value="Afvist">Afvist</option>
@@ -59,24 +59,24 @@
 
                             </select>
                         <strong>Sat dato:</strong> 
-                            <input id="date" type="date" name="date" style="height:30px;width:100%;margin-top:10px;margin-bottom:10px;" value="<%= orders[i-1].response.actualDate %>">
+                            <input id="date" type="date" name="date" style="height:30px;width:100%;margin-top:10px;margin-bottom:10px;" value="<%= orders[i].response.actualDate %>">
                         <strong>Kommentarer fra DECENTO:</strong>
-                            <textarea rows="10" name="comments" form="orderForm"><%=orders[i-1].response.comments%></textarea>
+                            <textarea rows="10" name="comments" form="orderForm"><%=orders[i].response.comments%></textarea>
                         <strong>Pris:</strong>
-                            <input type="text" name="price" value="<%=orders[i-1].response.price%>">
+                            <input type="text" name="price" value="<%=orders[i].response.price%>">
                         <strong>Kundens accept:</strong>
 
-                            <% if(orders[i-1].customerResponse.accepted) { %>
-                            <%= orders[i-1].customerResponse.accepted %><br>
+                            <% if(orders[i].customerResponse.accepted) { %>
+                            <%= orders[i].customerResponse.accepted %><br>
                             <% } else { %>
                                 (Afventer svar)<br>
                             <% } %>
                         <strong>Download link:</strong>
-                            <input type="text" name="downloadLink" value="<%=orders[i-1].response.downloadLink%>"><%=orders[i-1].response.downloadLink%>
+                            <input type="text" name="downloadLink" value="<%=orders[i].response.downloadLink%>"><%=orders[i].response.downloadLink%>
                         <br>
                         
                         <a href="#" onclick="document.getElementById('orderForm').submit()">Opdater ordre</a><br>
-                        <a href="/deleteorder/<%= orders[i-1].order.customerId %>/<%= orders[i-1]._id %>">Slet denne ordre</a>
+                        <a href="/deleteorder/<%= orders[i].order.customerId %>/<%= orders[i]._id %>">Slet denne ordre</a>
                     </p>
                     </form>
                 </p>
