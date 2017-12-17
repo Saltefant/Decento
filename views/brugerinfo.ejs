@@ -30,6 +30,8 @@
             <p>
                 <strong>id</strong>: <%= user._id %><br>
                 <strong>username</strong>: <%= user.local.username %><br>
+                <strong>role:</strong> <%= user.local.role %><br>
+                <strong>password:</strong> <%= user.local.password %><br>
             </p>
         
             <%try{if (message.length > 0) { %>
@@ -38,6 +40,9 @@
             
     <!-- HVIS BRUGER -->
         <h1>Opdater brugeroplysninger</h1>
+        <% if (user.local.role == 'Firma') { %>
+        <h3>Kontaktperson</h3>
+        <% } %>
 
         <form action="/updateuser" method="POST" id="infoForm">
             <label>Fornavn:</label>
@@ -54,6 +59,27 @@
             <input type="text" name="lastName" placeholder="(ikke udfyldt)">
             <% } %>
 
+            <label>Adresse:</label>
+            <% if (user.userinformation.adress) { %>
+            <input type="text" name="adress" value="<%=user.userinformation.adress%>">
+            <% } else { %>
+            <input type="text" name="adress" placeholder="(ikke udfyldt)">
+            <% } %>
+
+            <label>Postnummer:</label>
+            <% if (user.userinformation.postalcode) { %>
+            <input type="text" name="postalcode" value="<%=user.userinformation.postalcode%>">
+            <% } else { %>
+            <input type="text" name="postalcode" placeholder="(ikke udfyldt)">
+            <% } %>
+
+            <label>By:</label>
+            <% if (user.userinformation.city) { %>
+            <input type="text" name="city" value="<%=user.userinformation.city%>">
+            <% } else { %>
+            <input type="text" name="city" placeholder="(ikke udfyldt)">
+            <% } %>
+
             <label>Telefon nr.:</label>
             <% if (user.userinformation.phone) { %>
             <input type="text" name="phone" value="<%=user.userinformation.phone%>">
@@ -68,9 +94,53 @@
             <input type="text" name="email" placeholder="(ikke udfyldt)">
             <% } %>
 
+        <% if (user.local.role == 'Firma') { %>
 
-            
+            <h3>Firmaoplysninger</h3>
 
+            <label>Firmanavn:</label>
+            <% if (user.firminformation.firmName) { %>
+            <input type="text" name="firmName" value="<%=user.firminformation.firmName%>">
+            <% } else { %>
+            <input type="text" name="firmName" placeholder="(ikke udfyldt)">
+            <% } %>
+
+            <label>Adresse:</label>
+            <% if (user.firminformation.adress) { %>
+            <input type="text" name="fadress" value="<%=user.firminformation.adress%>">
+            <% } else { %>
+            <input type="text" name="fadress" placeholder="(ikke udfyldt)">
+            <% } %>
+
+            <label>Postnummer:</label>
+            <% if (user.firminformation.postalcode) { %>
+            <input type="text" name="fpostalcode" value="<%=user.firminformation.postalcode%>">
+            <% } else { %>
+            <input type="text" name="fpostalcode" placeholder="(ikke udfyldt)">
+            <% } %>
+
+            <label>By:</label>
+            <% if (user.firminformation.city) { %>
+            <input type="text" name="fcity" value="<%=user.firminformation.city%>">
+            <% } else { %>
+            <input type="text" name="fcity" placeholder="(ikke udfyldt)">
+            <% } %>
+
+            <label>Telefon nr.:</label>
+            <% if (user.firminformation.phone) { %>
+            <input type="text" name="fphone" value="<%=user.firminformation.phone%>">
+            <% } else { %>
+            <input type="text" name="fphone" placeholder="(ikke udfyldt)">
+            <% } %>
+
+            <label>Email:</label>
+            <% if (user.firminformation.email) { %>
+            <input type="text" name="femail" value="<%=user.firminformation.email%>">
+            <% } else { %>
+            <input type="text" name="femail" placeholder="(ikke udfyldt)">
+            <% } %>
+        
+        <% } %>
 
             <button type="submit">Opdater</button>
         </form>

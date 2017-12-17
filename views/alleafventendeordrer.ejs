@@ -15,12 +15,12 @@
 <div class="whiteout">
     <div class="content-wrap">
 
-            <h1>Alle ordrer</h1>
+            <h1>Alle afvendtene ordrer</h1>
             <a href="/profile">< Tilbage til profil</a><br>
             <%if (message.length > 0) { %>
                 <div class="alert"><%= message %></div><br>
             <% } %>
-            <p>Samtlige ordrer er listet herunder: (<%= orders.length %> ordrer i alt)</p>
+            <p>Samtlige afventende ordrer er listet herunder: (<%= orders.length %> ordrer venter på svar i alt)</p>
 
         <% for(var i=orders.length; i > 0; i--) {%>
             <div class="news-container">
@@ -46,6 +46,7 @@
             </div>
         <% } %>
         <a href="/profile">< Tilbage til profil</a><br><br>
+
     </div>
 </div>
 <!-- FOOTER -->

@@ -1,9 +1,3 @@
-a {
-    font-family: 'Segoe UI', Optima, sans-serif;
-    text-decoration: none;
-    letter-spacing: 1px;
-}
-
 h1 {
     font-family: 'Segoe UI', Optima, sans-serif;
     font-size: 45px;
@@ -438,6 +432,21 @@ img.avatar {
 .container {
     padding: 16px;
 }
+
+.container a {
+    color: rgb(190, 0, 0);
+    font-weight: 500;
+    padding: 0px 0px 0px 0px;
+    font-family: 'Segoe UI', Optima, sans-serif;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.container a:hover {
+    padding: 0px 0px 0px 0px;
+    text-decoration: underline;
+}
+
 .container-bottom {
     background-color:rgb(226, 226, 226);
     margin: 0px -16px -16px -16px;
@@ -484,8 +493,7 @@ span.psw {
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
     color: rgb(190, 0, 0);
     cursor: pointer;
 }
@@ -632,6 +640,12 @@ span {
     margin-top: -60px;
 }
 
+.news-container h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 30px; 
+}
+
 .pre-line {
     white-space: pre-line;
 }
@@ -640,8 +654,19 @@ span {
     padding: 5px 10px 0px 30px; 
     margin: 0px;
 }
-.news-container a {
-    padding: 0px 10px 0px 30px;
+
+.content-wrap a {
+    color: rgb(190, 0, 0);
+    font-weight: 500;
+    padding: 0px 0px 0px 0px;
+    font-family: 'Segoe UI', Optima, sans-serif;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.content-wrap a:hover {
+    padding: 0px 0px 0px 0px;
+    text-decoration: underline;
 }
 
 .headline-wrap {
@@ -664,11 +689,18 @@ span {
     background: rgb(140, 100, 0);
 }
 
-.headline-wrap h3 {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-left: 30px; 
+.headline-wrap.Bilfoto {
+    background: rgb(255, 90, 0);
 }
+
+.headline-wrap.Portrætfoto {
+    background: rgb(0, 110, 150);
+}
+
+.headline-wrap.Bryllupsfoto {
+    background: rgb(170, 0, 80);
+}
+
 .headline-wrap p {
     margin: 0px 0px -10px 0px;
 }

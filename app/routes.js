@@ -14,12 +14,12 @@ module.exports = function(app, passport) {
 // FORCE HTTPS =========================
 // =====================================
 
-app.get('*',function(req,res,next){
+/* app.get('*',function(req,res,next){
     if(req.headers['x-forwarded-proto']!='https')
       res.redirect('https://decento.herokuapp.com'+req.url);
     else
       next(); // Continue to other routes if we're not redirecting
-});
+}); */
 
 // =====================================
 // SHOW HOME PAGE ======================
@@ -38,7 +38,21 @@ app.get('/brugerinfo', isLoggedIn, function(req, res) {
 });
 
 app.post('/updateuser', isLoggedIn, function (req, res) {
-    User.findOneAndUpdate({'_id' : req.user._id}, {'userinformation.firstName' : req.body.firstName,'userinformation.lastName' : req.body.lastName,'userinformation.phone' : req.body.phone,'userinformation.email' : req.body.email }, {upsert:true}, (err, res2) => {
+    User.findOneAndUpdate({'_id' : req.user._id}, {
+        'userinformation.firstName' : req.body.firstName,
+        'userinformation.lastName' : req.body.lastName,
+        'userinformation.adress' : req.body.adress,
+        'userinformation.postalcode' : req.body.postalcode,
+        'userinformation.city' : req.body.city,
+        'userinformation.phone' : req.body.phone,
+        'userinformation.email' : req.body.email, 
+        'firminformation.firmName' : req.body.firmName,
+        'firminformation.adress' : req.body.fadress,
+        'firminformation.postalcode' : req.body.fpostalcode,
+        'firminformation.city' : req.body.fcity,
+        'firminformation.phone' : req.body.fphone,
+        'firminformation.email' : req.body.femail 
+    }, {upsert:true}, (err, res2) => {
         if (err) {
             req.flash('profileMessage', 'Noget gik galt...' + err);
             res.redirect('/profile');
@@ -59,9 +73,14 @@ app.post('/placeorder', isLoggedIn, function (req, res) {
     d = new Date();
 
     newOrder.order.customerId = req.body.userId;
-    newOrder.order.ordertype = req.body.type;
-    newOrder.order.text = req.body.txtArea;
-    newOrder.order.status = 'Venter på bekræftelse';
+    newOrder.order.ordertype = req.body.ordertype;
+    newOrder.order.details = req.body.details;
+    newOrder.order.wantedDate = req.body.date;
+    newOrder.response.status = 'Venter på bekræftelse';
+
+    newOrder.location.adress = req.body.adress;
+    newOrder.location.postalcode = req.body.postalcode;
+    newOrder.location.city = req.body.city;
 
     function addZero(i) {
         if (i < 10) {
@@ -69,7 +88,7 @@ app.post('/placeorder', isLoggedIn, function (req, res) {
         }
         return i;}
 
-    newOrder.order.date = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
+    newOrder.order.dateCreated = `${addZero(d.getDate())}-${addZero(d.getMonth())}-${d.getFullYear()} Kl. ${addZero(d.getHours())}:${addZero(d.getMinutes())}:${addZero(d.getSeconds())}`;
     
     if(newOrder.save()) {
         req.flash('profileMessage', 'Din ordre blev oprettet');
@@ -240,15 +259,50 @@ app.get('/portraetfoto', function(req, res) {
         user : req.user 
     });
 });
+// =====================================
+// UPDATE ORDER STATUS =================
+// =====================================
+
+app.get('/customeraccept/:customerid/:orderid/:status', isLoggedIn, function(req, res) { //__________________________________________________________________________________
+    
+    if(req.user._id == req.params.customerid) {
+            Order.findOneAndUpdate({'_id' : req.params.orderid}, {
+                'customerResponse.accepted' : req.params.status
+            }, {upsert:true}, (err, result) => {
+                if(err) {
+                    req.flash('profileMessage', "Noget gik galt... " + err);
+                    res.redirect('/profile')
+                }
+            Order.find((err, result) => {  
+                if (err) {
+                    req.flash('profileessage', 'Noget gik galt... ' + err)
+                    res.redirect('/profile');
+                } else {
+                    req.flash('profileMessage', 'Ordren blev opdateret')
+                    res.redirect('/profile'); 
+                }
+            });
+        });
+    } else {
+        req.flash('profileMessage','Du mangler rettigheder');
+        res.redirect('/profile')
+    }; 
+});
 
 // =====================================
 // UPDATE ORDER STATUS =================
 // =====================================
 
-app.get('/updateorder/:id/:newstatus', isLoggedIn, function(req, res) { //__________________________________________________________________________________
+app.post('/updateorder/:orderid', isLoggedIn, function(req, res) { //__________________________________________________________________________________
     
     if(req.user.local.role === "Admin") {
-            Order.findOneAndUpdate({'_id' : req.params.id}, {'order.status' : req.params.newstatus}, {upsert:true}, (err, result) => {
+            Order.findOneAndUpdate({'_id' : req.params.orderid}, {
+                'response.status' : req.body.status,
+                'response.comments' : req.body.comments,
+                'response.actualDate' : req.body.date,
+                'response.price' : req.body.price,
+                'response.downloadLink' : req.body.downloadLink
+            }, {upsert:true}, (err, result) => {
                 if(err) {
                     req.flash('orderMessage', "Noget gik galt... " + err);
                     res.redirect('/alleordrer')
@@ -384,6 +438,56 @@ app.get('/alleordrer', isLoggedIn, function(req, res) {
                 res.redirect('/profile');
             } else {
                 res.render('alleordrer.ejs', {
+                    user : req.user,
+                    orders : result,
+                    message : req.flash('orderMessage')
+                }); 
+            }
+            });
+        } else {
+            req.flash('profileMessage', 'Du mangler rettigheder')
+            res.redirect('/profile');
+        }; 
+});
+
+// =====================================
+// SHOW ALL WAITING ORDERS =============
+// =====================================
+
+app.get('/alleafventendeordrer', isLoggedIn, function(req, res) {
+    
+        if(req.user.local.role === "Admin") {
+            Order.find({ 'response.status': 'Venter på bekræftelse' },(err, result) => {  
+            if (err) {
+                req.flash('profileMessage', 'Noget gik galt... ' + err);
+                res.redirect('/profile');
+            } else {
+                res.render('alleafventendeordrer.ejs', {
+                    user : req.user,
+                    orders : result,
+                    message : req.flash('orderMessage')
+                }); 
+            }
+            });
+        } else {
+            req.flash('profileMessage', 'Du mangler rettigheder')
+            res.redirect('/profile');
+        }; 
+});
+
+// =====================================
+// DISPLAY AN ORDER ====================
+// =====================================
+
+app.get('/displayorder/:id', isLoggedIn, function(req, res) {
+    
+        if(req.user.local.role === "Admin") {
+            Order.find({ '_id' : req.params.id },(err, result) => {  
+            if (err) {
+                req.flash('profileMessage', 'Noget gik galt... ' + err);
+                res.redirect('/profile');
+            } else {
+                res.render('displayorder.ejs', {
                     user : req.user,
                     orders : result,
                     message : req.flash('orderMessage')

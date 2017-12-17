@@ -4,14 +4,12 @@ const mongoose = require('mongoose');
 
 // define the schema for our user model
 var newspostSchema = mongoose.Schema({
-
     newspost         : {
         headline     : String,
         text         : String,
         date         : String,
         imagePath    : String
     }
-    
 });
 
 // create the model for users and expose it to our app

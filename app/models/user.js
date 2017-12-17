@@ -15,6 +15,17 @@ var userSchema = mongoose.Schema({
     userinformation  : {
         firstName    : String,
         lastName     : String,
+        adress      : String,
+        postalcode   : String,
+        city         : String,
+        phone        : String,
+        email        : String
+    },
+    firminformation  : {
+        firmName     : String,
+        adress      : String,
+        postalcode   : String,
+        city         : String,
         phone        : String,
         email        : String
     }

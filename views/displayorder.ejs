@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decento - Ordrer</title>
+<% include shared/head.ejs %>
+</head>
+
+<!-- HEADER -->
+<% include shared/header.ejs %>
+
+<!-- NAVIGATION -->
+<% include shared/navigation.ejs %>
+
+<body>
+<div class="whiteout">
+    <div class="content-wrap">
+
+            <h1>Rediger ordre</h1>
+            <a href="javascript:history.back()">< Gå tilbage</a><br><br>
+            <%if (message.length > 0) { %>
+                <div class="alert"><%= message %></div><br>
+            <% } %>
+
+        <% for(var i=orders.length; i > 0; i--) {%>
+            <div class="news-container">
+                <div class="headline-wrap <%=orders[i-1].order.ordertype%>">
+                    <h3>Ordretype: <%= orders[i-1].order.ordertype %></h3>
+                </div>
+                <p>
+                    <strong>Ordre ID:</strong> <%= orders[i-1]._id %><br>
+                    <strong>Oprettet:</strong> <%= orders[i-1].order.dateCreated %><br>
+                    <strong>Bestilt af:</strong> <a href="/displayuser/<%= orders[i-1].order.customerId %>"><%= orders[i-1].order.customerId %></a><br>
+                    <strong>Ønsket dato:</strong> <%= orders[i-1].order.wantedDate %><br>
+                    <strong>Detaljer:</strong> <%= orders[i-1].order.details %><br>
+                    <br>
+                    <form action="/updateorder/<%= orders[i-1]._id %>" method="POST" id="orderForm">
+                    <p>   
+                        <strong>Status:</strong>
+                            <select name="status" style="width:100%;padding: 10px 10px 10px 10px;"required>
+
+                                <% if(orders[i-1].response.status == 'Venter på bekræftelse') {%>
+                                    <option selected value="Venter på bekræftelse">Venter på bekræftelse</option>
+                                <% } else { %>
+                                    <option value="Venter på bekræftelse">Venter på bekræftelse</option>
+                                <% } %>
+                                
+
+                                <% if(orders[i-1].response.status == 'Accepteret') {%>
+                                <option selected value="Accepteret">Accepteret</option>
+                                <% } else { %>
+                                <option value="Accepteret">Accepteret</option>
+                                <% } %>
+
+                                <% if(orders[i-1].response.status == 'Afvist') {%>
+                                    <option selected value="Afvist">Afvist</option>
+                                <% } else { %>
+                                    <option value="Afvist">Afvist</option>
+                                <% } %>
+
+                            </select>
+                        <strong>Sat dato:</strong> 
+                            <input id="date" type="date" name="date" style="height:30px;width:100%;margin-top:10px;margin-bottom:10px;" value="<%= orders[i-1].response.actualDate %>">
+                        <strong>Kommentarer fra DECENTO:</strong>
+                            <textarea rows="10" name="comments" form="orderForm"><%=orders[i-1].response.comments%></textarea>
+                        <strong>Pris:</strong>
+                            <input type="text" name="price" value="<%=orders[i-1].response.price%>">
+                        <strong>Kundens accept:</strong>
+
+                            <% if(orders[i-1].customerResponse.accepted) { %>
+                            <%= orders[i-1].customerResponse.accepted %><br>
+                            <% } else { %>
+                                (Afventer svar)<br>
+                            <% } %>
+                        <strong>Download link:</strong>
+                            <input type="text" name="downloadLink" value="<%=orders[i-1].response.downloadLink%>"><%=orders[i-1].response.downloadLink%>
+                        <br>
+                        
+                        <a href="#" onclick="document.getElementById('orderForm').submit()">Opdater ordre</a>
+                        <a href="/deleteorder/<%= orders[i-1].order.customerId %>/<%= orders[i-1]._id %>">Slet denne ordre</a>
+                    </p>
+                    </form>
+                </p>
+            </div>
+        <% } %>
+        <a href="javascript:history.back()">< Gå tilbage</a>
+    </div>
+</div>
+<!-- FOOTER -->
+<%- include shared/footer.ejs %>
+</body>
+</html>

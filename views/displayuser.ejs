@@ -15,19 +15,48 @@
     <div class="whiteout">
         <div class="content-wrap">
             <h1>Bruger</h1>
+            <a href="javascript:history.back()">< Gå tilbage</a><br><br>
             <div class="news-container">
                 <div class="headline-wrap">
                     <h3>Brugernavn: <%= founduser.local.username %></h3>
                 </div>
                 <p>
-                Id: <%= founduser._id %><br>
-                Role: <%= founduser.local.role %><br>
-                Password: <%= founduser.local.password %><br>
+                <strong>Id:</strong> <%= founduser._id %><br>
+                <strong>Role:</strong> <%= founduser.local.role %><br>
+                <strong>Password:</strong> <%= founduser.local.password %><br>
+                </p>
                 <br>
-                Fornavn: <%= founduser.userinformation.firstName %><br>
-                Efternavn: <%= founduser.userinformation.lastName %><br>
-                Telefon nr.: <a href="tel:<%= founduser.userinformation.phone %>" title="Ring op!"><%= founduser.userinformation.phone %></a><br>
-                Email: <a href="mailto:<%= founduser.userinformation.email %>"><%= founduser.userinformation.email %></a><br>
+                
+                <% if (founduser.local.role == 'Firma') { %>
+                    <h3>Kontaktperson:</h3>
+                <% } %>
+                
+                <p>
+                <strong>Fornavn:</strong> <%= founduser.userinformation.firstName %><br>
+                <strong>Efternavn:</strong> <%= founduser.userinformation.lastName %><br>
+                <strong>Adresse:</strong> <%=founduser.userinformation.adress%><br>
+                <strong>Postnummer:</strong> <%=founduser.userinformation.postalcode%><br>
+                <strong>By:</strong> <%=founduser.userinformation.city%><br>
+                <strong>Telefon nr.:</strong> <a href="tel:<%= founduser.userinformation.phone %>" title="Ring op!"><%= founduser.userinformation.phone %></a><br>
+                <strong>Email:</strong> <a href="mailto:<%= founduser.userinformation.email %>"><%= founduser.userinformation.email %></a><br>
+                </p>
+
+                <% if (founduser.local.role == 'Firma') { %>
+
+                <br>
+                <h3>Firmaoplysninger:</h3>
+
+                <p>    
+                <strong>Firmanavn:</strong> <%=founduser.firminformation.firmName%><br>
+                <strong>Adresse:</strong> <%=founduser.firminformation.adress%><br>
+                <strong>Postnummer:</strong> <%=founduser.firminformation.postalcode%><br>
+                <strong>By:</strong> <%=founduser.firminformation.city%><br>
+                <strong>Telefon nr.:</strong> <%=founduser.firminformation.phone%><br>
+                <strong>Email:</strong> <%=founduser.firminformation.email%><br>
+                </p>
+                    
+                <% } %>
+
             </div>
             <a href="javascript:history.back()">< Gå tilbage</a>
         </div>
