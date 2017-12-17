@@ -26,8 +26,8 @@
                 <br>
                 Fornavn: <%= founduser.userinformation.firstName %><br>
                 Efternavn: <%= founduser.userinformation.lastName %><br>
-                Telefon nr.: <a href="tel:<%= founduser.userinformation.phone %>"><%= founduser.userinformation.phone %></a><br>
-                Efternavn nr: <%= founduser.userinformation.email %><br>
+                Telefon nr.: <a href="tel:<%= founduser.userinformation.phone %>" title="Ring op!"><%= founduser.userinformation.phone %></a><br>
+                Email: <a href="mailto:<%= founduser.userinformation.email %>"><%= founduser.userinformation.email %></a><br>
             </div>
             <a href="javascript:history.back()">< Gå tilbage</a>
         </div>

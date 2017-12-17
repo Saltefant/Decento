@@ -11,7 +11,18 @@ var multer  = require('multer');
 module.exports = function(app, passport) {
 
 // =====================================
-// SHOW HOME PAGE  =====================
+// FORCE HTTPS =========================
+// =====================================
+
+app.get('*',function(req,res,next){
+    if(req.headers['x-forwarded-proto']!='https')
+      res.redirect('https://decento.herokuapp.com'+req.url);
+    else
+      next(); // Continue to other routes if we're not redirecting
+});
+
+// =====================================
+// SHOW HOME PAGE ======================
 // =====================================
 
 app.get('/', function(req, res) {
@@ -271,6 +282,7 @@ app.get('/displayuser/:id', isLoggedIn, function(req, res) {
                 res.redirect('/profile')
             } else {
             res.render('displayuser.ejs', {
+                user : req.user,
                 founduser : result}); 
             }
         });
