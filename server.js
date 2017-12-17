@@ -17,16 +17,16 @@ configDB        = require('./config/database.js');
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
-/*
-mongoose.connect('mongodb://AdminUser:password@ds149954.mlab.com:49954/myfirstmongodb', {
-    useMongoClient: true,
-    /* other options */
-/*
-});
-*/
-
 
 require('./config/passport')(passport); // pass passport for configuration
+
+// force https
+app.get('*',function(req,res,next){
+    if(req.headers['x-forwarded-proto']!='https')
+      res.redirect('https://decento.herokuapp.com'+req.url);
+    else
+      next(); /* Continue to other routes if we're not redirecting */
+});
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
