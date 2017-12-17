@@ -301,7 +301,8 @@ app.post('/updateorder/:orderid', isLoggedIn, function(req, res) { //___________
                 'response.comments' : req.body.comments,
                 'response.actualDate' : req.body.date,
                 'response.price' : req.body.price,
-                'response.downloadLink' : req.body.downloadLink
+                'response.downloadLink' : req.body.downloadLink,
+                'customerResponse.accepted' : 'Venter på bekræftelse'
             }, {upsert:true}, (err, result) => {
                 if(err) {
                     req.flash('profileMessage', "Noget gik galt... " + err);
